@@ -24,6 +24,7 @@ nav ul {
     padding: 0px;
     margin: 0px;
     overflow: hidden;
+    border-bottom: 2px black solid;
 }
 
 nav li {
@@ -32,6 +33,11 @@ nav li {
 
 #left{
     float: left;
+}
+
+#left input{
+    width: 230px;
+    height: 54px;
 }
 
 nav a {
@@ -55,6 +61,41 @@ body
     background-color: brown;
 }
 
+input{
+    background-color: hsl(0, 0%, 10%);
+    color: white;
+}
+
+.side-panel{
+    position: fixed;
+    height: 100%;
+    width: 30%;
+    background-color: hsl(0, 0%, 25%);
+    color: white;
+    border-right: black solid 2px;
+    border-left: black solid 2px;
+    text-align: center;
+    left: 0;
+    top: 0;
+}
+
+.side-panel img{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.side-panel img:hover{
+    cursor: pointer;
+}
+
+.side-panel h1{
+    margin-top: 30px;
+}
+
+.side-panel input{
+    margin-bottom: 10px;
+}
 
 /*footer*/
 footer {
