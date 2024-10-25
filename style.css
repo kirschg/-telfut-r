@@ -2,6 +2,11 @@ h1 {
     text-align: center;
 }
 
+a{
+    text-decoration: none;
+    color: white;
+}
+
 header {
     background-image: url("img/header.jpg");
     background-repeat: no-repeat;
@@ -18,6 +23,10 @@ header a{
     text-decoration: none;
 }
 
+header a:hover{
+    text-shadow: 2px 2px black;
+}
+
 nav ul {
     list-style-type: none;
     background-color: hsl(0, 0%, 25%);
@@ -27,29 +36,28 @@ nav ul {
     border-bottom: 2px black solid;
 }
 
-nav li {
-    float: right;
-}
-
 #left{
     float: left;
+    padding: 0;
 }
 
 #left input{
     width: 230px;
-    height: 54px;
+    height: 55px;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
+nav li{
+    float: right;
+    height: 55px;
     padding: 15px;
+    color: white;
     display: block;
     text-align: center;
 }
 
-nav a:hover {
+nav li:hover {
     background-color: hsl(0, 0%, 10%);
+    cursor: pointer;
 }
 
 body
@@ -57,13 +65,21 @@ body
     margin: 0px;
 }
 
-#register:hover {
+.special:hover {
     background-color: brown;
 }
 
 input{
     background-color: hsl(0, 0%, 25%);
     color: white;
+}
+
+#leftpanel{
+    left: 0;
+}
+
+#rightpanel{
+    right: 0;
 }
 
 .side-panel{
@@ -75,7 +91,6 @@ input{
     border-right: black solid 2px;
     border-left: black solid 2px;
     text-align: center;
-    left: 0;
     top: 0;
 }
 

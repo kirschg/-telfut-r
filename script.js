@@ -38,7 +38,7 @@ function login(){
     logopen=!logopen;
     if(logopen){
         code = `
-        <div class="side-panel">
+        <div class="side-panel" id="#leftpanel">
             <img src="img/arrow.png" onclick="login()" height="50px">
             <h1>Bejelentkezés</h1>
             <br>
@@ -59,10 +59,5 @@ function login(){
         </div>
         `
     }
-    else
-    {
-
-    }
-    
-    document.getElementById("here").innerHTML=code;
+    document.getElementById("panel").innerHTML=code;
 }
