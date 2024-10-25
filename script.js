@@ -32,7 +32,7 @@ language={
 </body>`
 
 let logopen = false;
-document.getElementById("login").addEventListener("click",login)
+document.getElementsByClassName("login").addEventListener("click",login)
 function login(){
     code = ``
     logopen=!logopen;
