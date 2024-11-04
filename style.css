@@ -112,6 +112,22 @@ input{
     margin-bottom: 10px;
 }
 
+article
+{
+
+}
+
+article h2
+{
+    text-align: center;
+    border: 2px black solid;
+}
+
+aside
+{
+
+}
+
 /*footer*/
 footer {
     text-align: center;
