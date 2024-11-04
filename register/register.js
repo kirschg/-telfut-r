@@ -1,5 +1,9 @@
 let logopen = false;
-document.getElementsByClassName("loginFasz").addEventListener("click",login)
+let list = document.getElementsByClassName("login");
+for(let i = 0; i < list.length; i++)
+{
+    list[i].addEventListener("click",login);
+}
 function login(){
     code = ``
     logopen=!logopen;
@@ -26,6 +30,6 @@ function login(){
         </div>
         `
     }
-
+    console.log(code)
     document.getElementById("here").innerHTML=code;
 }
