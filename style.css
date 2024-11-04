@@ -130,7 +130,7 @@ footer * {
 }
 
 .language_select {
-    margin-top: 16px;
+    margin-top: 0px;
     color: white;
     background-color:hsl(0, 0%, 24%)
 }
