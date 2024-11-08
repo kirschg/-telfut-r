@@ -1,4 +1,5 @@
 let code = ``;
+let company_full_name = "Ételfutár®";
 let local_lang = "HU";
 language={ 
     "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
@@ -233,7 +234,13 @@ document.getElementById("language_select").onchange = function() {
         document.getElementById("login").innerHTML = "Bejelentkezés";
         document.getElementById("register").innerHTML = "Regisztrálj";
         document.getElementById("main_page").innerHTML = "Főoldal";
-        document.getElementById("search_input").placeholder = 'Keresés...';
+        document.getElementById("search_input").placeholder = "Keresés...";
+        document.getElementById("text1").innerHTML = "Üdvözöljük";
+        document.getElementById("text2").innerHTML = `Fedezd fel a magyar konyha ízletes világát, ahol a hagyományos fogások és a modern gasztronómiai élmények találkoznak! A ${company_full_name} célja, hogy egyszerűbbé és élvezetesebbé tegye számodra a finom ételek rendelését, bármilyen alkalomra.`;
+        document.getElementById("text3").innerHTML = "Akciók és kedvezmények";
+        document.getElementById("text4").innerHTML = `Ne felejts el körülnézni aktuális akcióink között! Rendszeresen kínálunk kedvezményeket és különleges ajánlatokat, hogy még jobban kihasználhasd a ${company_full_name} előnyeit.`;
+        document.getElementById("text5").innerHTML = "Rendelj most!";
+        document.getElementById("text6").innerHTML = `Legyen szó egy családi vacsoráról, baráti összejövetelről vagy csak egy egyszerű ebédről, a ${company_full_name} a tökéletes választás számodra! Kényeztesd magad a legfinomabb magyar ételekkel, és tapasztald meg a gyors és megbízható kiszállítást.`;
     }
     else if(language === "lang_en") 
     {
@@ -243,6 +250,12 @@ document.getElementById("language_select").onchange = function() {
         document.getElementById("login").innerHTML = "Login";
         document.getElementById("register").innerHTML = "Register Now";
         document.getElementById("main_page").innerHTML = "Main Page";
-        document.getElementById("search_input").placeholder = 'Search...';
+        document.getElementById("search_input").placeholder = "Search...";
+        document.getElementById("text1").innerHTML = "Welcome";
+        document.getElementById("text2").innerHTML = `Discover the delicious world of Hungarian cuisine, where traditional dishes and modern gastronomic experiences meet! The goal of ${company_full_name} is to make it easier and more enjoyable for you to order delicious food for any occasion.`;
+        document.getElementById("text3").innerHTML = "Promotions and discounts";
+        document.getElementById("text4").innerHTML = `Don't forget to look around among our current promotions! We regularly offer discounts and special offers to help you get more out of ${company_full_name}.`;
+        document.getElementById("text5").innerHTML = "Order now!";
+        document.getElementById("text6").innerHTML = `Whether it's a family dinner, a gathering of friends or just a simple lunch, ${company_full_name} is the perfect choice for you! Pamper yourself with the most delicious Hungarian food and experience fast and reliable delivery.`;
     }
 }
