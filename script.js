@@ -2,8 +2,24 @@ let code = ``;
 let company_full_name = "Ételfutár®";
 let currentLanguage = "HU";
 language={ 
-    "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
-    "EN":["Login","Register","langauge","cart","search...","Welcome","2024 Ételfutár® - All rights reserved."]
+    "HU":[
+        "Bejelentkezés",//0.
+        "Regisztrálj",//1.
+        "nyelv",//2.
+        "kosár",//3.
+        "keresés...",//4.
+        "Üdvözöljük",//5.
+        "2024 Ételfutár® - Minden jog fenntartva."//6.
+    ], 
+    "EN":[
+        "Login",//0.
+        "Register",//1.
+        "langauge",//2.
+        "cart",//3.
+        "search...",//4.
+        "Welcome",//5.
+        "2024 Ételfutár® - All rights reserved."//6.
+    ]
 };
 `<body>
     <main>
