@@ -1,6 +1,4 @@
-let code_login = ``;
-let code_register = ``;
-let code_cart = ``;
+let code = ``;
 language={ 
     "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
     "EN":["Login","Register","langauge","cart","search...","Welcome","2024 Ételfutár® - All rights reserved."]
@@ -34,14 +32,16 @@ language={
 </body>`
 
 //Bejelentkezés
-let logopen_login = false;
+let logopen = false;
 document.getElementById("login").addEventListener("click",login)
 function login(){
-    code_login = ``
-    logopen_login=!logopen_login;
-    if(logopen_login){
-        code_login = `
-        <div class="side-panel" id="leftpanel">
+    code = ``
+    logopen=!logopen;
+    regopen = false;
+    cartopen = false;
+    if(logopen){
+        code = `
+        <div class="panel" id="leftpanel">
             <img src="img/arrow.png" onclick="login()" height="50px">
             <h1>Bejelentkezés</h1>
             <br>
@@ -62,18 +62,20 @@ function login(){
         </div>
         `
     }
-    document.getElementById("panel").innerHTML=code_login;
+    document.getElementById("panel").innerHTML=code;
 }
 
 //Regisztrálás
-logopen_register = false;
+regopen = false;
 document.getElementById("register").addEventListener("click",register)
 function register(){
-    code_register = ``
-    logopen_register=!logopen_register;
-    if(logopen_register){
-        code_register = `
-        <div class="side-panel" id="leftpanel">
+    code = ``
+    logopen=false;;
+    regopen = !regopen;
+    cartopen = false;
+    if(regopen){
+        code = `
+        <div class="panel" id="leftpanel">
             <img src="img/arrow.png" onclick="register()" height="50px">
             <h1>Regisztráció</h1>
             <br>
@@ -104,18 +106,20 @@ function register(){
         </div>
         `
     }
-    document.getElementById("panel").innerHTML=code_register;
+    document.getElementById("panel").innerHTML=code;
 }
 
 //Kosár
-logopen_cart = false;
+cartopen = false;
 document.getElementById("cart").addEventListener("click",cart)
 function cart(){
-    code_cart = ``
-    logopen_cart=!logopen_cart;
-    if(logopen_cart){
-        code_cart = `
-        <div class="side-panel" id="rightpanel">
+    code = ``
+    logopen=false;
+    regopen = false;
+    cartopen = !cartopen;
+    if(cartopen){
+        code = `
+        <div class="panel" id="rightpanel">
             <img src="img/arrow.png" onclick="cart()" height="50px">
             <h1>Kosár</h1>
             <br>
@@ -146,5 +150,5 @@ function cart(){
         </div>
         `
     }
-    document.getElementById("panel").innerHTML=code_cart;
+    document.getElementById("panel").innerHTML=code;
 }
