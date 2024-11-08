@@ -1,4 +1,5 @@
 let code = ``;
+let code_register = ``;
 language={ 
     "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
     "EN":["Login","Register","langauge","cart","search...","Welcome","2024 Ételfutár® - All rights reserved."]
@@ -31,6 +32,7 @@ language={
     <script src="script.js"></script>
 </body>`
 
+//Bejelentkezés
 let logopen = false;
 document.getElementById("login").addEventListener("click",login)
 function login(){
@@ -60,4 +62,46 @@ function login(){
         `
     }
     document.getElementById("panel").innerHTML=code;
+}
+
+//Regisztrálás
+logopen_register = false;
+document.getElementById("register").addEventListener("click",register)
+function register(){
+    code_register = ``
+    logopen_register=!logopen_register;
+    if(logopen_register){
+        code_register = `
+        <div class="side-panel" id="#leftpanel">
+            <img src="img/arrow.png" onclick="login()" height="50px">
+            <h1>Regisztráció</h1>
+            <br>
+            <div>
+                <label for="name">Felhasználó név</label>
+                <br>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="name">Email cím</label>
+                <br>
+                <input type="text" id="email">
+            </div>
+            <div>
+                <label for="pass">Jelszó</label>
+                <br>
+                <input type="text" id="pass">
+            </div>
+            <div>
+                <label for="pass_again">Jelszó újra</label>
+                <br>
+                <input type="text" id="pass_again">
+            </div>
+            <br>
+            <div>
+                <input type="button" value="Regisztrálás">
+            </div>
+        </div>
+        `
+    }
+    document.getElementById("panel").innerHTML=code_register;
 }
