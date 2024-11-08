@@ -1,7 +1,7 @@
 let code = ``;
 language={ 
     "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
-    "EN":["Login","Register","langauge","cart","search...","Welcome","2024 Ételfutár® - All rights reserved."]
+    "EN":["Login","Register","language","cart","search...","Welcome","2024 Ételfutár® - All rights reserved."]
 };
 `<body>
     <main>
