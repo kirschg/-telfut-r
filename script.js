@@ -123,25 +123,8 @@ function cart(){
             <img src="img/arrow.png" onclick="cart()" height="50px">
             <h1>Kosár</h1>
             <br>
-            <div>
-                <label for="name">Felhasználó név</label>
-                <br>
-                <input type="text" id="name">
-            </div>
-            <div>
-                <label for="name">Email cím</label>
-                <br>
-                <input type="text" id="email">
-            </div>
-            <div>
-                <label for="pass">Jelszó</label>
-                <br>
-                <input type="text" id="pass">
-            </div>
-            <div>
-                <label for="pass_again">Jelszó újra</label>
-                <br>
-                <input type="text" id="pass_again">
+            <div id="order">
+                
             </div>
             <br>
             <div>
