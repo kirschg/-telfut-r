@@ -1,7 +1,25 @@
 let code = ``;
+let company_full_name = "Ételfutár®";
+let currentLanguage = "HU";
 language={ 
-    "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
-    "EN":["Login","Register","language","cart","search...","Welcome","2024 Ételfutár® - All rights reserved."]
+    "HU":[
+        "Bejelentkezés",//0.
+        "Regisztrálj",//1.
+        "nyelv",//2.
+        "kosár",//3.
+        "keresés...",//4.
+        "Üdvözöljük",//5.
+        "2024 Ételfutár® - Minden jog fenntartva."//6.
+    ], 
+    "EN":[
+        "Login",//0.
+        "Register",//1.
+        "langauge",//2.
+        "cart",//3.
+        "search...",//4.
+        "Welcome",//5.
+        "2024 Ételfutár® - All rights reserved."//6.
+    ]
 };
 `<body>
     <main>
@@ -40,7 +58,9 @@ function login(){
     regopen = false;
     cartopen = false;
     if(logopen){
-        code = `
+        if(local_lang == "HU") 
+        {
+            code = `
         <div class="panel" id="leftpanel">
             <img src="img/arrow.png" onclick="login()" height="50px">
             <h1>Bejelentkezés</h1>
@@ -61,6 +81,32 @@ function login(){
             </div>
         </div>
         `
+        }
+        else if(local_lang == "EN") 
+        {
+            code = `
+        <div class="panel" id="leftpanel">
+            <img src="img/arrow.png" onclick="login()" height="50px">
+            <h1>Login</h1>
+            <br>
+            <div>
+                <label for="name">Username or Email address</label>
+                <br>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="pass">Password</label>
+                <br>
+                <input type="text" id="pass">
+            </div>
+            <br>
+            <div>
+                <input type="button" value="Login">
+            </div>
+        </div>
+        `
+        }
+        
     }
     document.getElementById("panel").innerHTML=code;
 }
@@ -74,37 +120,74 @@ function register(){
     regopen = !regopen;
     cartopen = false;
     if(regopen){
-        code = `
-        <div class="panel" id="leftpanel">
-            <img src="img/arrow.png" onclick="register()" height="50px">
-            <h1>Regisztráció</h1>
-            <br>
-            <div>
-                <label for="name">Felhasználó név</label>
+        if(local_lang == "HU") 
+        {
+            code = `
+            <div class="panel" id="leftpanel">
+                <img src="img/arrow.png" onclick="register()" height="50px">
+                <h1>Regisztráció</h1>
                 <br>
-                <input type="text" id="name">
-            </div>
-            <div>
-                <label for="name">Email cím</label>
+                <div>
+                    <label for="name">Felhasználónév</label>
+                    <br>
+                    <input type="text" id="name">
+                </div>
+                <div>
+                    <label for="name">Email cím</label>
+                    <br>
+                    <input type="text" id="email">
+                </div>
+                <div>
+                    <label for="pass">Jelszó</label>
+                    <br>
+                    <input type="text" id="pass">
+                </div>
+                <div>
+                    <label for="pass_again">Jelszó újra</label>
+                    <br>
+                    <input type="text" id="pass_again">
+                </div>
                 <br>
-                <input type="text" id="email">
+                <div>
+                    <input type="button" value="Regisztrálás">
+                </div>
             </div>
-            <div>
-                <label for="pass">Jelszó</label>
+            `
+        }
+        else if(local_lang == "EN") 
+        {
+            code = `
+            <div class="panel" id="leftpanel">
+                <img src="img/arrow.png" onclick="register()" height="50px">
+                <h1>Register</h1>
                 <br>
-                <input type="text" id="pass">
-            </div>
-            <div>
-                <label for="pass_again">Jelszó újra</label>
+                <div>
+                    <label for="name">Username</label>
+                    <br>
+                    <input type="text" id="name">
+                </div>
+                <div>
+                    <label for="name">Email address</label>
+                    <br>
+                    <input type="text" id="email">
+                </div>
+                <div>
+                    <label for="pass">Password</label>
+                    <br>
+                    <input type="text" id="pass">
+                </div>
+                <div>
+                    <label for="pass_again">Password again</label>
+                    <br>
+                    <input type="text" id="pass_again">
+                </div>
                 <br>
-                <input type="text" id="pass_again">
+                <div>
+                    <input type="button" value="Regisztrálás">
+                </div>
             </div>
-            <br>
-            <div>
-                <input type="button" value="Regisztrálás">
-            </div>
-        </div>
-        `
+            `
+        }
     }
     document.getElementById("panel").innerHTML=code;
 }
@@ -118,37 +201,46 @@ function cart(){
     regopen = false;
     cartopen = !cartopen;
     if(cartopen){
-        code = `
-        <div class="panel" id="rightpanel">
-            <img src="img/arrow.png" onclick="cart()" height="50px">
-            <h1>Kosár</h1>
-            <br>
-            <div>
-                <label for="name">Felhasználó név</label>
+        if(local_lang == "HU") 
+        {
+            code = `
+            <div class="panel" id="rightpanel">
+                <img src="img/arrow.png" onclick="cart()" height="50px">
+                <h1>Kosár</h1>
                 <br>
-                <input type="text" id="name">
-            </div>
-            <div>
-                <label for="name">Email cím</label>
+                <div id="order">
+
+                </div>
                 <br>
-                <input type="text" id="email">
+                <div>
+                    <input type="button" value="Rendelés">
+                </div>
             </div>
-            <div>
-                <label for="pass">Jelszó</label>
+            `
+        }
+        else if(local_lang == "EN") 
+        {
+            code = `
+            <div class="panel" id="rightpanel">
+                <img src="img/arrow.png" onclick="cart()" height="50px">
+                <h1>Cart</h1>
                 <br>
-                <input type="text" id="pass">
-            </div>
-            <div>
-                <label for="pass_again">Jelszó újra</label>
+                <div id="order">
+
+                </div>
                 <br>
-                <input type="text" id="pass_again">
+                <div>
+                    <input type="button" value="Order">
+                </div>
             </div>
-            <br>
-            <div>
-                <input type="button" value="Rendelés">
-            </div>
-        </div>
-        `
+            `
+        }
     }
     document.getElementById("panel").innerHTML=code;
+}
+
+//Select Language
+document.getElementById("language_select").onchange = function() {
+    const language = document.getElementById("language_select").value;
+    currentLanguage = language.value
 }

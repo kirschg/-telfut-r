@@ -14,15 +14,15 @@
         </header>
         <nav>
             <ul>
-                <li id="left"><input type="text" placeholder="Keresés.."></li>
-                <li id="cart">Kosár</li>
-                <li><select class="language_select">
-                    <option value="lang_hu">HU</option>
-                    <option value="lang_en">EN</option>
+                <li id="left"><input id="search_input" type="text" placeholder="Keresés.."></li>
+                <li id="cart" class="special">Kosár</li>
+                <li><select id="language_select" class="language_select">
+                    <option value="HU">HU</option>
+                    <option value="EN">EN</option>
                 </select></li>
                 <li id="register" class="special">Regisztrálj</li>
                 <li id="login" class="special">Bejelentkezés</li>
-                <li class="nav_selected" onclick="location.href='./index.html';">Főoldal</li>
+                <li id="main_page" class="nav_selected" onclick="location.href='./index.html';">Főoldal</li>
             </ul>
         </nav>
         <article>
