@@ -124,7 +124,7 @@ function cart(){
             <h1>Kosár</h1>
             <br>
             <div id="order">
-                
+
             </div>
             <br>
             <div>
@@ -135,3 +135,5 @@ function cart(){
     }
     document.getElementById("panel").innerHTML=code;
 }
+
+//asd
