@@ -1,4 +1,5 @@
 let code = ``;
+let company_full_name = "Ételfutár®";
 let currentLanguage = "HU";
 language={ 
     "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
