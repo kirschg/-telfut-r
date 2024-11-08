@@ -135,5 +135,3 @@ function cart(){
     }
     document.getElementById("panel").innerHTML=code;
 }
-
-//asd
