@@ -228,9 +228,21 @@ document.getElementById("language_select").onchange = function() {
     if(language === "lang_hu") 
     {
         local_lang = "HU";
+        //Set Texts Language
+        document.getElementById("cart").innerHTML = "Kosár";
+        document.getElementById("login").innerHTML = "Bejelentkezés";
+        document.getElementById("register").innerHTML = "Regisztrálj";
+        document.getElementById("main_page").innerHTML = "Főoldal";
+        document.getElementById("search_input").placeholder = 'Keresés...';
     }
     else if(language === "lang_en") 
     {
         local_lang = "EN";
+        //Set Texts Language
+        document.getElementById("cart").innerHTML = "Cart";
+        document.getElementById("login").innerHTML = "Login";
+        document.getElementById("register").innerHTML = "Register Now";
+        document.getElementById("main_page").innerHTML = "Main Page";
+        document.getElementById("search_input").placeholder = 'Search...';
     }
 }

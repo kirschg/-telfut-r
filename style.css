@@ -11,6 +11,16 @@
     padding: 0;
 }
 
+#search{
+    float: left;
+    padding: 0;
+}
+
+#search input {
+    width: 230px;
+    height: 55px;
+}
+
 #left input{
     width: 230px;
     height: 55px;
