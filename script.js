@@ -1,5 +1,5 @@
 let code = ``;
-let local_lang = "HU";
+let currentLanguage = "HU";
 language={ 
     "HU":["Bejelentkezés","Regisztrálj","nyelv","kosár","keresés...","Üdvözöljük","2024 Ételfutár® - Minden jog fenntartva."], 
     "EN":["Login","Register","langauge","cart","search...","Welcome","2024 Ételfutár® - All rights reserved."]
@@ -225,12 +225,5 @@ function cart(){
 //Select Language
 document.getElementById("language_select").onchange = function() {
     const language = document.getElementById("language_select").value;
-    if(language === "lang_hu") 
-    {
-        local_lang = "HU";
-    }
-    else if(language === "lang_en") 
-    {
-        local_lang = "EN";
-    }
+    currentLanguage = language.value
 }
