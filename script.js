@@ -10,7 +10,19 @@ language={
         "keresés...",//4.
         "Üdvözöljük",//5.
         "2024 Ételfutár® - Minden jog fenntartva.",//6.
-        "Főoldal"//7.
+        "Főoldal",//7.
+        "Üdvözöljük",//8.
+        "Akciók és kedvezmények",//9.
+        "Rendelj most!",//10.
+        "Miért rendeljen tőlünk?",//11.
+        `Fedezd fel a nemzetközi konyha ízletes világát, ahol a hagyományos fogások és a modern gasztronómiai élmények találkoznak! A ${company_full_name} célja, hogy egyszerűbbé és élvezetesebbé tegye számodra a finom ételek rendelését, bármilyen alkalomra.`,//12.
+        `Ne felejts el körülnézni aktuális akcióink között! Rendszeresen kínálunk kedvezményeket és különleges ajánlatokat, hogy még jobban kihasználhasd a ${company_full_name} előnyeit.`,//13.
+        `Legyen szó egy családi vacsoráról, baráti összejövetelről vagy csak egy egyszerű ebédről, a ${company_full_name} a tökéletes választás számodra! Kényeztesd magad a legfinomabb magyar ételekkel, és tapasztald meg a gyors és megbízható kiszállítást.`,//14.
+        `Rendelj egyszerűen a legjobb éttermekből, és mi házhoz szállítjuk a kedvenc ételeidet gyorsan, kényelmesen, akár 30 percen belül!`,//15.
+        `több mint 100 étterem közül válogathatsz! Legyen szó külföldi vagy hazai éttermekről`,//16.
+        `Kedvezmények a hűséges vásárlóknak`,//17.
+        `Kényelmes és biztonságos online rendelés és fizetés.`,//18.
+        `Az ételnek nincs lába! Rendeld meg a ${company_full_name}-tól`//19.
     ], 
     "EN":[
         "Login",//0.
@@ -20,7 +32,19 @@ language={
         "search...",//4.
         "Welcome",//5.
         "2024 Ételfutár® - All rights reserved.",//6.
-        "Main Page"//7.
+        "Main Page",//7.
+        "Welcome",//8.
+        "Promotions and discounts",//9.
+        "Order now!",//10.
+        "Why order from us?",//11.
+        `Discover the delicious world of international cuisine, where traditional dishes and modern gastronomic experiences meet! ${company_full_name} aims to make it easier and more enjoyable for you to order delicious food for any occasion.`,//12.
+        `Don't forget to look around among our current promotions! We regularly offer discounts and special offers to help you get more out of ${company_full_name}.`,//13.
+        `Whether it's a family dinner, a gathering of friends or just a simple lunch, ${company_full_name} is the perfect choice for you! Pamper yourself with the most delicious Hungarian food and experience fast and reliable delivery.`,//14.
+        `Simply order from the best restaurants, and we will deliver your favorite dishes to your home quickly and comfortably, within 30 minutes!`,//15.
+        `you can choose from more than 100 restaurants! Be it foreign or domestic restaurants`,//16.
+        `Discounts for loyal customers`,//17.
+        `Convenient and secure online ordering and payment.`,//18.
+        `Food has no legs! Order from ${company_full_name}`//19.
     ]
 };
 
@@ -240,20 +264,20 @@ function MainPageLink()
             </ul>
         `;
     document.getElementById("body_elements").innerHTML = `
-    <h2>Üdvözöljük</h2>
-    <p>Fedezd fel a nemzetközi konyha ízletes világát, ahol a hagyományos fogások és a modern gasztronómiai élmények találkoznak! A [Cég neve] célja, hogy egyszerűbbé és élvezetesebbé tegye számodra a finom ételek rendelését, bármilyen alkalomra.</p>
-    <h3>Akciók és kedvezmények</h3>
-    <p>Ne felejts el körülnézni aktuális akcióink között! Rendszeresen kínálunk kedvezményeket és különleges ajánlatokat, hogy még jobban kihasználhasd a [Cég neve] előnyeit.</p>
-    <h3>Rendelj most!</h3>
-    <p>Legyen szó egy családi vacsoráról, baráti összejövetelről vagy csak egy egyszerű ebédről, a [Cég neve] a tökéletes választás számodra! Kényeztesd magad a legfinomabb magyar ételekkel, és tapasztald meg a gyors és megbízható kiszállítást.</p>
-    <h3>Miért rendeljen tőlünk?</h3>
-    <p>Rendelj egyszerűen a legjobb éttermekből, és mi házhoz szállítjuk a kedvenc ételeidet gyorsan, kényelmesen, akár 30 percen belül!</p>
+    <h2>${language[currentLanguage][8]}</h2>
+    <p>${language[currentLanguage][12]}</p>
+    <h3>${language[currentLanguage][9]}</h3>
+    <p>${language[currentLanguage][13]}</p>
+    <h3>${language[currentLanguage][10]}</h3>
+    <p>${language[currentLanguage][14]}</p>
+    <h3>${language[currentLanguage][11]}</h3>
+    <p>${language[currentLanguage][15]}</p>
     <ul>
         <!-- nem tudom mit írjak még ide, majd később rájövök -->
-        <li>több mint 100 étterem közül válogathatsz! Legyen szó külföldi vagy hazai éttermekről</li>
-        <li>Kedvezmények a hűséges vásárlóknak</li>
-        <li>Kényelmes és biztonságos online rendelés és fizetés.</li>
-        <li>Az ételnek nincs lába! rendeld meg a [cég neve]</li>
+        <li>${language[currentLanguage][16]}</li>
+        <li>${language[currentLanguage][17]}</li>
+        <li>${language[currentLanguage][18]}</li>
+        <li>${language[currentLanguage][19]}</li>
     </ul>
     `;
     document.getElementById("footer_elements").innerHTML = `
