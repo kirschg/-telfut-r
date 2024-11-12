@@ -242,8 +242,18 @@ function cart(){
 //Select Language
 function languageselect() 
 {
-    currentLanguage = document.getElementById("language_select").value;
-    MainPageLink();
+    if (document.getElementById("language_select").value === "HU") 
+    {
+        currentLanguage = "HU";
+        MainPageLink();
+        document.getElementById("language_select").selectedIndex = 0;
+    }
+    else if (document.getElementById("language_select").value === "EN") 
+    {
+        currentLanguage = "EN";
+        MainPageLink();
+        document.getElementById("language_select").selectedIndex = 1;
+    }
 }
 
 
@@ -288,7 +298,7 @@ function MainPageLink()
     document.getElementById("cart").addEventListener("click",cart)
     document.getElementById("main_page_link").addEventListener("click",MainPageLink) 
     document.getElementById("main_page").addEventListener("click",MainPageLink)
-    document.getElementById("language_select").addEventListener("click",languageselect)
+    document.getElementById("language_select").addEventListener("change",languageselect)
 }
 
 MainPageLink();
