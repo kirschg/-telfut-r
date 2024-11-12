@@ -299,6 +299,14 @@ function MainPageLink()
     document.getElementById("main_page_link").addEventListener("click",MainPageLink) 
     document.getElementById("main_page").addEventListener("click",MainPageLink)
     document.getElementById("language_select").addEventListener("change",languageselect)
+    if (currentLanguage == "HU")
+    {
+        document.getElementById("language_select").selectedIndex = 0;
+    }
+    else if (currentLanguage == "EN") 
+    {
+        document.getElementById("language_select").selectedIndex = 1;
+    }
 }
 
 MainPageLink();
