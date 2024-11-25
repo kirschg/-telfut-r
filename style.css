@@ -30,15 +30,9 @@
 }
 
 .panel{
-    position: fixed;
-    height: 100%;
-    width: 30%;
     background-color: hsl(0, 0%, 37%);
     color: white;
-    border-right: black solid 2px;
-    border-left: black solid 2px;
     text-align: center;
-    top: 0;
 }
 
 .panel img{

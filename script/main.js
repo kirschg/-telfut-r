@@ -48,150 +48,6 @@ language={
     ]
 };
 
-
-//Bejelentkezés
-let logopen = false;
-
-function login(){
-    code = ``
-    logopen=!logopen;
-    regopen = false;
-    cartopen = false;
-    if(logopen){
-        if(currentLanguage == "HU") 
-        {
-            code = `
-        <div class="panel" id="leftpanel">
-            <img src="img/arrow.png" onclick="login()" height="50px">
-            <h1>Bejelentkezés</h1>
-            <br>
-            <div>
-                <label for="name">Felhasználó név vagy Email Cím</label>
-                <br>
-                <input type="text" id="name">
-            </div>
-            <div>
-                <label for="pass">Jelszó</label>
-                <br>
-                <input type="text" id="pass">
-            </div>
-            <br>
-            <div>
-                <input type="button" value="Bejelentkezés">
-            </div>
-        </div>
-        `
-        }
-        else if(currentLanguage == "EN") 
-        {
-            code = `
-        <div class="panel" id="leftpanel">
-            <img src="img/arrow.png" onclick="login()" height="50px">
-            <h1>Login</h1>
-            <br>
-            <div>
-                <label for="name">Username or Email address</label>
-                <br>
-                <input type="text" id="name">
-            </div>
-            <div>
-                <label for="pass">Password</label>
-                <br>
-                <input type="text" id="pass">
-            </div>
-            <br>
-            <div>
-                <input type="button" value="Login">
-            </div>
-        </div>
-        `
-        }
-        
-    }
-    document.getElementById("panel").innerHTML=code;
-}
-
-//Regisztrálás
-regopen = false;
-
-function register(){
-    code = ``
-    logopen=false;;
-    regopen = !regopen;
-    cartopen = false;
-    if(regopen){
-        if(currentLanguage == "HU") 
-        {
-            code = `
-            <div class="panel" id="leftpanel">
-                <img src="img/arrow.png" onclick="register()" height="50px">
-                <h1>Regisztráció</h1>
-                <br>
-                <div>
-                    <label for="name">Felhasználónév</label>
-                    <br>
-                    <input type="text" id="name">
-                </div>
-                <div>
-                    <label for="name">Email cím</label>
-                    <br>
-                    <input type="text" id="email">
-                </div>
-                <div>
-                    <label for="pass">Jelszó</label>
-                    <br>
-                    <input type="text" id="pass">
-                </div>
-                <div>
-                    <label for="pass_again">Jelszó újra</label>
-                    <br>
-                    <input type="text" id="pass_again">
-                </div>
-                <br>
-                <div>
-                    <input type="button" value="Regisztrálás">
-                </div>
-            </div>
-            `
-        }
-        else if(currentLanguage == "EN") 
-        {
-            code = `
-            <div class="panel" id="leftpanel">
-                <img src="img/arrow.png" onclick="register()" height="50px">
-                <h1>Register</h1>
-                <br>
-                <div>
-                    <label for="name">Username</label>
-                    <br>
-                    <input type="text" id="name">
-                </div>
-                <div>
-                    <label for="name">Email address</label>
-                    <br>
-                    <input type="text" id="email">
-                </div>
-                <div>
-                    <label for="pass">Password</label>
-                    <br>
-                    <input type="text" id="pass">
-                </div>
-                <div>
-                    <label for="pass_again">Password again</label>
-                    <br>
-                    <input type="text" id="pass_again">
-                </div>
-                <br>
-                <div>
-                    <input type="button" value="Regisztrálás">
-                </div>
-            </div>
-            `
-        }
-    }
-    document.getElementById("panel").innerHTML=code;
-}
-
 //Kosár
 cartopen = false;
 
@@ -201,9 +57,19 @@ function cart(){
     regopen = false;
     cartopen = !cartopen;
     if(cartopen){
-        if(currentLanguage == "HU") 
-        {
-            code = `
+
+        code =`
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Offcanvas with backdrop</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <p>.....</p>
+            </div>
+        </div>`
+        
+            /*code = `
             <div class="panel" id="rightpanel">
                 <img src="img/arrow.png" onclick="cart()" height="50px">
                 <h1>Kosár</h1>
@@ -217,9 +83,7 @@ function cart(){
                 </div>
             </div>
             `
-        }
-        else if(currentLanguage == "EN") 
-        {
+
             code = `
             <div class="panel" id="rightpanel">
                 <img src="img/arrow.png" onclick="cart()" height="50px">
@@ -233,43 +97,32 @@ function cart(){
                     <input type="button" value="Order">
                 </div>
             </div>
-            `
-        }
+            `*/
     }
-    document.getElementById("panel").innerHTML=code;
+    document.getElementById("panel").innerHTML = code;
 }
 
 //Select Language
 function languageselect() 
 {
-    if (document.getElementById("language_select").value === "HU") 
-    {
-        currentLanguage = "HU";
-        MainPageLink();
-        document.getElementById("language_select").selectedIndex = 0;
-    }
-    else if (document.getElementById("language_select").value === "EN") 
-    {
-        currentLanguage = "EN";
-        MainPageLink();
-        document.getElementById("language_select").selectedIndex = 1;
-    }
+    MainPageLink();
 }
 
 
 
 function MainPageLink()
 {
+    currentLanguage = document.getElementById("lang")!=null? document.getElementById("lang").value : "HU"
     document.getElementById("nav_elements").innerHTML = `
             <ul>
                 <li id="left"><input id="search_input" type="text" placeholder="${language[currentLanguage][4]}"></li>
                 <li id="cart" class="special">${language[currentLanguage][3]}</li>
-                <li><select id="language_select" class="language_select">
+                <li><select id="lang" class="language_select">
                     <option value="HU">HU</option>
                     <option value="EN">EN</option>
                 </select></li>
-                <li id="register" class="special">${language[currentLanguage][1]}</li>
-                <li id="login" class="special">${language[currentLanguage][0]}</li>
+                <li id="register" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">${language[currentLanguage][1]}</li>
+                <li id="login" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">${language[currentLanguage][0]}</li>
                 <li id="main_page" class="nav_selected">${language[currentLanguage][7]}</li>
             </ul>
         `;
@@ -293,20 +146,12 @@ function MainPageLink()
     document.getElementById("footer_elements").innerHTML = `
         <p>${language[currentLanguage][6]}</p>
     `;
-    document.getElementById("login").addEventListener("click",login)
-    document.getElementById("register").addEventListener("click",register)
+
     document.getElementById("cart").addEventListener("click",cart)
-    document.getElementById("main_page_link").addEventListener("click",MainPageLink) 
     document.getElementById("main_page").addEventListener("click",MainPageLink)
-    document.getElementById("language_select").addEventListener("change",languageselect)
-    if (currentLanguage == "HU")
-    {
-        document.getElementById("language_select").selectedIndex = 0;
-    }
-    else if (currentLanguage == "EN") 
-    {
-        document.getElementById("language_select").selectedIndex = 1;
-    }
+    document.getElementById("lang").addEventListener("change",languageselect)
+    document.getElementById("register").addEventListener("click",register)
+    document.getElementById("login").addEventListener("click",login)
 }
 
 MainPageLink();
