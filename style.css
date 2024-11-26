@@ -1,11 +1,3 @@
-#leftpanel{
-    left: 0;
-}
-
-#rightpanel{
-    right: 0;
-}
-
 #left{
     float: left;
     padding: 0;
@@ -27,6 +19,10 @@
     background-color: darkgray;
     width: 100%;
     height: 70%;
+}
+
+.button{
+    padding: 10px;
 }
 
 .panel{
@@ -54,9 +50,19 @@
 }
 
 .language_select {
-    margin-top: 0px;
+    padding: 0;
+}
+
+.language_select select {
+    padding: 16px;
     color: white;
-    background-color:hsl(0, 0%, 24%)
+    background-color:hsl(0, 0%, 25%);
+    border: none;
+}
+
+.language_select select:hover {
+    background-color: hsl(0, 0%, 10%);
+    cursor: pointer;
 }
 
 .nav_selected {

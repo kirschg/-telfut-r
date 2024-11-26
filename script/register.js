@@ -1,32 +1,43 @@
 let reglanguage = {
     "HU":[
-        "Bejelentkezés", //0.
-        "Felhasználó név vagy E-mail cím", //1.
-        "Jelszó", //2.
-        "Bejelentkezés", //3.
-        "Bejelentkezés", //4.
+        "Regisztrálás", //0.
+        "E-mail cím", //1.
+        "Felhasználó név", //2.
+        "Jelszó", //3.
+        "Jelszó megerősítése", //4.
         "Registrálj" //5.
     ], 
     "EN":[
-        "Bejelentkezés", //0.
-        "Felhasználó név vagy E-mail cím", //1.
-        "Jelszó", //2.
-        "Bejelentkezés", //3.
-        "Bejelentkezés", //4.
-        "Registrálj" //5.
+        "Registration", //0.
+        "E-mail address", //1.
+        "Username", //2.
+        "Password", //3.
+        "Password conformation", //4.
+        "Register" //5.
     ]
 }
 
 function register(){
-    currlang = document.getElementById("lang")!=null? document.getElementById("lang").value : "HU"
-    code = `
-    <div class="offcanvas offcanvas-start panel" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
-        <div class="offcanvas-header">
-            <h1 class="offcanvas-title" id="offcanvasWithBackdropLabel">${reglanguage[currlang][0]}</h1>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <p>
+    let reglanguage = {
+        "HU":[
+            "Regisztrálás", //0.
+            "E-mail cím", //1.
+            "Felhasználó név", //2.
+            "Jelszó", //3.
+            "Jelszó megerősítése", //4.
+            "Registrálj" //5.
+        ], 
+        "EN":[
+            "Registration", //0.
+            "E-mail address", //1.
+            "Username", //2.
+            "Password", //3.
+            "Password conformation", //4.
+            "Register" //5.
+        ]
+    }
+    document.getElementById("offcanvasWithBackdropLabel").innerHTML = reglanguage[currlang][0]
+    document.getElementById("panelbody").innerHTML=`
                 <div>
                     <label for="name">${reglanguage[currlang][1]}</label>
                     <br>
@@ -49,12 +60,8 @@ function register(){
                 </div>
                 <br>
                 <div>
-                    <input type="button" value="${reglanguage[currlang][5]}">
+                    <input type="button" class="button" value="${reglanguage[currlang][5]}">
                 </div>
-            </p>
-        </div>
-    </div>`
-    document.getElementById("panel").innerHTML = code;
+            </p>`
 }
 document.getElementById("register").addEventListener("click",register)
-register()

@@ -6,41 +6,43 @@ let loginlanguage = {
         "Bejelentkezés" //3.
     ], 
     "EN":[
-        "Bejelentkezés", //0.
-        "Felhasználó név vagy E-mail cím", //1.
-        "Jelszó", //2.
-        "Bejelentkezés" //3.
+        "Login", //0.
+        "Username or E-mail", //1.
+        "Password", //2.
+        "Login" //3.
     ]
 }
 
 function login(){
-    currlang = document.getElementById("lang")!=null? document.getElementById("lang").value : "HU"
-    code = `
-    <div class="offcanvas offcanvas-start panel" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
-        <div class="offcanvas-header">
-            <h1 class="offcanvas-title" id="offcanvasWithBackdropLabel">${loginlanguage[currlang][0]}</h1>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <p>
+    let loginlanguage = {
+        "HU":[
+            "Bejelentkezés", //0.
+            "Felhasználó név vagy E-mail cím", //1.
+            "Jelszó", //2.
+            "Bejelentkezés" //3.
+        ], 
+        "EN":[
+            "Login", //0.
+            "Username or E-mail", //1.
+            "Password", //2.
+            "Login" //3.
+        ]
+    }
+    document.getElementById("offcanvasWithBackdropLabel").innerHTML = loginlanguage[currLang][0]
+    document.getElementById("panelbody").innerHTML=`
             <div>
-                <label for="name">${loginlanguage[currlang][1]}</label>
+                <label for="name">${loginlanguage[currLang][1]}</label>
                 <br>
                 <input type="text" id="name">
             </div>
             <div>
-                <label for="pass">${loginlanguage[currlang][2]}</label>
+                <label for="pass">${loginlanguage[currLang][2]}</label>
                 <br>
                 <input type="text" id="pass">
             </div>
             <br>
             <div>
-                <input type="button" value="${loginlanguage[currlang][3]}">
-            </div>
-            </p>
-        </div>
-    </div>`
-
-    document.getElementById("panel").innerHTML = code;
+                <input type="button" class="button" value="${loginlanguage[currLang][3]}">
+            </div>`
 }
 document.getElementById("login").addEventListener("click",login)
