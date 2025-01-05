@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2025 at 04:34 PM
+-- Generation Time: Jan 05, 2025 at 05:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -122,18 +122,18 @@ INSERT INTO `ettermek` (`Id`, `Cim`, `ChainId`, `varosId`, `Indexkep`) VALUES
 (24, 'Fő tér 8', 6, 6, 'https://corvinusetterem.hu/images/microsites/1920x716/2b0c6d9e.jpg'),
 (25, 'Mátyás király u. 1', 7, 6, 'https://maimoni.cafeblog.hu/files/2012/08/DSC05682.jpg'),
 (26, 'Határdomb út 1-2', 8, 6, 'https://etterem.hu/img/max960/p11984n/1425302845-6304.jpg'),
-(27, 'KFC Budapest', 0, 1, ''),
-(28, 'KFC Miskolc', 0, 2, ''),
-(30, 'KFC Debrecen', 0, 3, ''),
-(31, 'KFC Győr', 0, 4, ''),
-(32, 'KFC Kecskemét', 0, 7, ''),
-(33, 'KFC Nyíregyháza', 0, 10, ''),
-(34, 'KFC Budaörs', 0, 12, ''),
-(35, 'KFC Gödöllő', 0, 13, ''),
-(36, 'KFC Szentendre', 0, 14, ''),
-(37, 'KFC Pécs', 0, 8, ''),
-(38, 'KFC Szeged', 0, 9, ''),
-(39, 'KFC Szombathely', 0, 5, '');
+(27, 'Thököly út 6', 2, 1, 'https://lh3.googleusercontent.com/p/AF1QipOtVUysO953eLLPNtUSsiRk34lxhXqlY3_Lcs2s=s138-w138-h108-n-k-no'),
+(28, 'Pesti út 13', 2, 2, 'https://lh3.googleusercontent.com/p/AF1QipN6oMeRZtKqttcjT1QqkEAXrP7Dx38_4HpZh3G2=s90-w90-h72-n-k-no'),
+(30, 'Kishegyesi út 1', 2, 3, 'https://lh3.googleusercontent.com/p/AF1QipPTiR13rDZPnUEkEo0DviEcllk_rsDUBu6a2FXM=s90-w90-h72-n-k-no'),
+(31, 'Baross Gábor út 24', 2, 4, 'https://lh3.googleusercontent.com/p/AF1QipNHs0vguWvzY-yqHBIHCe0PJvHFe2bhQNzYMfAo=s90-w90-h72-n-k-no'),
+(32, 'Izsáki út 12', 2, 7, 'https://lh3.googleusercontent.com/p/AF1QipN_kX9V9ZsBdzMbncfh5CGuS0IeFOHQAY92B_M-=s184-w184-h144-n-k-no'),
+(33, 'Kert u. 47/A', 2, 10, 'https://lh3.googleusercontent.com/p/AF1QipNM8GkBv-_IPD8LbQtaLyeFUmGMY3Q5BFb2ZCq6=s220-w165-h220-n-k-no'),
+(34, 'Garibaldi u. 2', 2, 12, 'https://lh3.googleusercontent.com/p/AF1QipNFvblN-gaSjDez6gFK3-Chzzoryu7P4aU4tBbG=s184-w184-h130-n-k-no'),
+(35, 'Dózsa György út 136', 2, 13, 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/4e/18/f1/caption.jpg?w=900&h=-1&s=1'),
+(36, 'Kalászi út HRSZ 11283', 2, 14, 'https://lh5.googleusercontent.com/p/AF1QipNn_ZH-VvQR6bHzftdfa9reJrV4DO2FYzkuFRd4=w650-h486-k-no'),
+(37, 'Makay István út 5', 2, 8, 'https://lh3.googleusercontent.com/p/AF1QipM14DMaMwE7HeacrzmQQqC6ZcKWeEusIum5SJMh=s90-w90-h72-n-k-no'),
+(38, 'Kárász u. 16', 2, 9, 'https://lh3.googleusercontent.com/p/AF1QipPhxbWHxNvts1G17fgPGLxeB-PM5PZvtAiaLdxE=s120-w120-h87-n-k-no'),
+(39, 'Zanati út 70', 2, 5, 'https://lh3.googleusercontent.com/p/AF1QipN7aRg9JGeLbgFdy_S4Rtokde0JPZb9rrw7bnOE=s184-w184-h144-n-k-no');
 
 -- --------------------------------------------------------
 
@@ -324,7 +324,7 @@ ALTER TABLE `etelek`
 -- AUTO_INCREMENT for table `ettermek`
 --
 ALTER TABLE `ettermek`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `excludedetel`
