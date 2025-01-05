@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 11:10 AM
+-- Generation Time: Jan 04, 2025 at 08:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,27 +24,59 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chain`
+--
+
+CREATE TABLE `chain` (
+  `Id` int(11) NOT NULL,
+  `Nev` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chain`
+--
+
+INSERT INTO `chain` (`Id`, `Nev`) VALUES
+(7, 'Alcatraz Ételbár'),
+(0, 'Burger King'),
+(8, 'Chens Étterem'),
+(6, 'Corvinus Étterem'),
+(2, 'KFC'),
+(5, 'Lángos Ház'),
+(3, 'Mcdonalds'),
+(4, 'Papa Joe Saloon & Steakhouse');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `etelek`
 --
 
 CREATE TABLE `etelek` (
+  `Id` int(11) NOT NULL,
   `nev` varchar(32) NOT NULL,
   `kaloria` int(11) NOT NULL,
   `ar` int(11) NOT NULL,
-  `etteremId` int(11) NOT NULL
+  `ChainId` int(11) NOT NULL,
+  `Indexkep` varchar(224) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `etelek`
 --
 
-INSERT INTO `etelek` (`nev`, `kaloria`, `ar`, `etteremId`) VALUES
-(' Big Tasty® ', 903, 3190, 2),
-('Sajtburger', 326, 750, 2),
-('McChicken®', 422, 750, 2),
-('Sajtburger McMoment® menü', 231, 1340, 2),
-('Big Mac® McMenü® Plusz', 965, 2590, 2),
-('Málnás-krémtúrós pite', 246, 790, 2);
+INSERT INTO `etelek` (`Id`, `nev`, `kaloria`, `ar`, `ChainId`, `Indexkep`) VALUES
+(1, ' Big Tasty® ', 903, 3190, 3, 'https://s7d1.scene7.com/is/image/mcdonalds/NAT253_BigTasty_Termekkep_832x822_v2:nutrition-calculator-tile?wid=822&hei=822&dpr=off'),
+(2, 'Big Mac® McMenü® Plusz', 965, 2590, 3, 'https://s7d1.scene7.com/is/image/mcdonalds/DIG_154_Menu_McMenuPlusz_832x822:nutrition-calculator-tile?wid=822&hei=822&dpr=off'),
+(3, 'Málnás-krémtúrós pite', 246, 790, 3, 'https://s7d1.scene7.com/is/image/mcdonalds/AMalnasKremturosPite_Web_832x822:nutrition-calculator-tile?wid=822&hei=822&dpr=off'),
+(4, 'McChicken®', 422, 750, 3, 'https://s7d1.scene7.com/is/image/mcdonalds/mcchicken-kep:nutrition-calculator-tile?wid=822&hei=822&dpr=off'),
+(5, 'Sajtburger', 326, 750, 3, 'https://s7d1.scene7.com/is/image/mcdonalds/DIG_202_Sajtburger_Termekkep_832x822:nutrition-calculator-tile?wid=822&hei=822&dpr=off'),
+(6, 'Sajtburger McMoment® menü', 231, 1340, 3, 'https://s7d1.scene7.com/is/image/mcdonalds/DIG_122_Weboldal_Termekkep_Szendvics_Duplasajtburger_jalapeno_832x822:nutrition-calculator-tile'),
+(7, 'Bacon King', 1288, 3220, 0, 'https://burgerking.hu/app/uploads/2024/09/BaconKing_690x387px.png'),
+(8, 'Dupla WHOPPER®', 1059, 2490, 0, 'https://www.burgerking.ee/images/optimized/products/dbl-whopper-desktop-9a3769cafad2eb0eb9c40e583b5a6642.png'),
+(9, 'WHOPPER® Jr.', 368, 1390, 0, 'https://www.burgerking.ee/images/optimized/products/whopper-jr-desktop-1fa41c48157077fcd15ef66636aa8466.png'),
+(10, 'Chicken Bacon King', 773, 2870, 0, 'https://burgerking.hu/app/uploads/2024/09/ChickenBaconKing_690x387px.png'),
+(11, '25 kosár', 208, 4990, 2, 'https://sawepecomcdn.blob.core.windows.net/kfc-web-ordering/KFC_HUN/16_Kosarak/440x440/25_bucket_440x440.png');
 
 -- --------------------------------------------------------
 
@@ -54,52 +86,66 @@ INSERT INTO `etelek` (`nev`, `kaloria`, `ar`, `etteremId`) VALUES
 
 CREATE TABLE `ettermek` (
   `Id` int(11) NOT NULL,
-  `Nev` varchar(32) NOT NULL,
-  `varosId` int(11) NOT NULL
+  `Cim` varchar(32) NOT NULL,
+  `ChainId` int(11) NOT NULL,
+  `varosId` int(11) NOT NULL,
+  `Indexkep` varchar(224) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ettermek`
 --
 
-INSERT INTO `ettermek` (`Id`, `Nev`, `varosId`) VALUES
-(2, 'McDonald\'s Budapest', 1),
-(3, 'McDonald\'s Debrecen', 3),
-(4, 'McDonald\'s Miskolc', 2),
-(5, 'McDonald\'s Győr', 4),
-(6, 'McDonald\'s Kecskemét', 7),
-(7, 'McDonald\'s Nyíregyháza', 10),
-(8, 'McDonald\'s Szombathely', 5),
-(9, 'McDonald\'s Budakalász', 11),
-(10, 'McDonald\'s Budaörs', 12),
-(11, 'McDonald\'s Gödöllő', 13),
-(12, 'Burger King Budapest', 1),
-(13, 'Burger King Debrecen', 3),
-(14, 'Burger King Győr', 4),
-(15, 'Burger King Kecskemét', 7),
-(16, 'Burger King Miskolc', 2),
-(17, 'Burger King Nyíregyháza', 10),
-(18, 'Burger King Budaörs', 12),
-(19, 'Burger King Sopron', 6),
-(20, 'McDonald\'s Sopron', 6),
-(21, 'KFC Sopron', 6),
-(22, 'Papa Joe Saloon & Steakhouse', 6),
-(23, 'Lángos Ház', 6),
-(24, 'Corvinus Étterem', 6),
-(25, 'Alcatraz Ételbár', 6),
-(26, 'Chen\'s Étterem', 6),
-(27, 'KFC Budapest', 1),
-(28, 'KFC Miskolc', 2),
-(30, 'KFC Debrecen', 3),
-(31, 'KFC Győr', 4),
-(32, 'KFC Kecskemét', 7),
-(33, 'KFC Nyíregyháza', 10),
-(34, 'KFC Budaörs', 12),
-(35, 'KFC Gödöllő', 13),
-(36, 'KFC Szentendre', 14),
-(37, 'KFC Pécs', 8),
-(38, 'KFC Szeged', 9),
-(39, 'KFC Szombathely', 5);
+INSERT INTO `ettermek` (`Id`, `Cim`, `ChainId`, `varosId`, `Indexkep`) VALUES
+(2, 'József krt. 8', 3, 1, 'https://lh3.googleusercontent.com/p/AF1QipPo--v0GPx6WcEF30wtilnC3SriT_pJmsArFAzZ=s184-w184-h130-n-k-no'),
+(3, 'Kishegyesi út 2', 3, 3, 'https://lh3.googleusercontent.com/p/AF1QipPehHPiyy1exc91j_MZ7VigDIXKfJeG8GuYQtfk=s156-w156-h108-n-k-no'),
+(4, 'Soltész Nagy Kálmán u. 152', 3, 2, 'https://lh3.googleusercontent.com/p/AF1QipMa4m2zd4QtjrRT5wn8u6SfKQtaFjA05OlBRCkK=s184-w184-h144-n-k-no'),
+(5, 'Baross Gábor út 23', 3, 4, 'https://lh3.googleusercontent.com/p/AF1QipP0QD6cNrHITN5gvCwnZuMURpuL_lcZUD5zSaPa=s184-w184-h144-n-k-no'),
+(6, 'Jókai u. 46', 3, 7, 'https://lh3.googleusercontent.com/p/AF1QipPWMjYWIjFUV8SX2B4y5JI7EG7DonlVErwNcOjL=s184-w184-h144-n-k-no'),
+(7, 'László u. 59', 3, 10, 'https://lh3.googleusercontent.com/p/AF1QipM_lhOBkKiVkcfpxYjyd7xl79POvWVP5x-RWDyN=s184-w184-h144-n-k-no'),
+(8, 'Kéthly Anna u. 7', 3, 5, 'https://lh3.googleusercontent.com/p/AF1QipMbYVk04B4aZxQT5w7X3ga55eh2_n-zmNNPLKfC=s184-w184-h144-n-k-no'),
+(9, 'Omszk park 1', 3, 11, 'https://lh5.googleusercontent.com/p/AF1QipMawBGqYqKBhQ8zA9gY6YUrXlaWfBCyYl9cqTL_=w650-h315-k-no'),
+(10, 'Garibaldi u. 2', 3, 12, 'https://lh3.googleusercontent.com/p/AF1QipNoSTJ2LsCKL1a7cp1wysXRtAz3yqwqk_CZVu5a=s184-w184-h144-n-k-no'),
+(11, 'Bossányi Krisztina utca 13', 3, 13, 'https://static.regon.hu/pe/2019/08/meki.jpg'),
+(12, 'Váci u 7', 0, 1, 'https://lh3.googleusercontent.com/p/AF1QipNH6WFSxoono1y8NmPUHIPR3zFkgG57tm6NwoGF=s138-w138-h108-n-k-no'),
+(13, 'Böszörményi út 24', 0, 3, 'https://lh3.googleusercontent.com/p/AF1QipMTHX3eCUi7lf6lz9fbKB4rcTFQ_4x8JwiJ7Z4A=s120-w120-h87-n-k-no'),
+(14, 'Budai út 1', 0, 4, 'https://www.arkadgyor.hu/fileadmin/_processed_/c/4/csm_2023_01_24_Burger_King_04_ac3edae6c1.jpg'),
+(15, 'Dunaföldvári út 2', 0, 7, 'https://kecskemet.hu/assets/cache/images/fe/fe7ecb45eab5e6b76f94c50e19c6b17f.jpg'),
+(16, 'József Attila u. 87', 0, 2, 'https://lh3.googleusercontent.com/p/AF1QipNmDItCdrK17ptK-cdbucv6G3Vx4egmmQT0QR7S=s184-w184-h144-n-k-no'),
+(17, 'Pazonyi út 32', 0, 10, 'https://lh3.googleusercontent.com/p/AF1QipPW_R-P0PC6ex8fF-w1GfRTIbe_LdewK1sruvhW=w600-k'),
+(18, 'Sport u. 2', 0, 12, 'https://www.ittjartam.hu/profil/ugor-images/burger-king-auchan-budaors-964-1200x800.webp'),
+(19, 'Határdomb út 1-3', 0, 6, 'https://i2.wp.com/cyberpress.hu/wp-content/uploads/2021/06/Burger_King_atado-5-Nagy.jpg?fit=1200%2C900&ssl=1'),
+(20, 'Lackner K. u 60', 3, 6, 'https://ikvahir.eu/wp-content/uploads/2022/04/20220412_193840.jpg'),
+(21, 'Ipar krt. 32', 2, 6, 'https://ikvahir.eu/wp-content/uploads/2018/10/IMG_20181008_181229-Egyedi.jpg'),
+(22, 'Várkerület 108', 4, 6, 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/bb/10/18/papa-joe-s-saloon-steakhouse.jpg?w=900&h=500&s=1'),
+(23, 'Hajnal tér 23', 5, 6, 'https://etterem.hu/img/x/p9853n/1415026264-6370.jpg'),
+(24, 'Fő tér 8', 6, 6, 'https://corvinusetterem.hu/images/microsites/1920x716/2b0c6d9e.jpg'),
+(25, 'Mátyás király u. 1', 7, 6, 'https://maimoni.cafeblog.hu/files/2012/08/DSC05682.jpg'),
+(26, 'Határdomb út 1-2', 8, 6, 'https://etterem.hu/img/max960/p11984n/1425302845-6304.jpg'),
+(27, 'KFC Budapest', 0, 1, ''),
+(28, 'KFC Miskolc', 0, 2, ''),
+(30, 'KFC Debrecen', 0, 3, ''),
+(31, 'KFC Győr', 0, 4, ''),
+(32, 'KFC Kecskemét', 0, 7, ''),
+(33, 'KFC Nyíregyháza', 0, 10, ''),
+(34, 'KFC Budaörs', 0, 12, ''),
+(35, 'KFC Gödöllő', 0, 13, ''),
+(36, 'KFC Szentendre', 0, 14, ''),
+(37, 'KFC Pécs', 0, 8, ''),
+(38, 'KFC Szeged', 0, 9, ''),
+(39, 'KFC Szombathely', 0, 5, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `excludedetel`
+--
+
+CREATE TABLE `excludedetel` (
+  `Id` int(11) NOT NULL,
+  `EtelId` int(11) NOT NULL,
+  `EtteremId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -111,6 +157,8 @@ CREATE TABLE `felhasznalok` (
   `Id` int(255) NOT NULL,
   `FelhasznaloNev` varchar(32) NOT NULL,
   `Email` varchar(64) NOT NULL,
+  `VarosId` int(11) NOT NULL,
+  `Lakcim` varchar(64) NOT NULL,
   `Hash` varchar(64) NOT NULL,
   `Salt` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -119,8 +167,46 @@ CREATE TABLE `felhasznalok` (
 -- Dumping data for table `felhasznalok`
 --
 
-INSERT INTO `felhasznalok` (`Id`, `FelhasznaloNev`, `Email`, `Hash`, `Salt`) VALUES
-(1, 'Takács László', 'takacslaci@gmail.com', '', '');
+INSERT INTO `felhasznalok` (`Id`, `FelhasznaloNev`, `Email`, `VarosId`, `Lakcim`, `Hash`, `Salt`) VALUES
+(1, 'Takács László', 'takacslaci@gmail.com', 1, 'Petőfi Utca 29', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rendeles`
+--
+
+CREATE TABLE `rendeles` (
+  `Id` int(11) NOT NULL,
+  `FelhasznaloId` int(11) NOT NULL,
+  `OsszAr` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rendeles`
+--
+
+INSERT INTO `rendeles` (`Id`, `FelhasznaloId`, `OsszAr`) VALUES
+(1, 1, 10000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rendeltetel`
+--
+
+CREATE TABLE `rendeltetel` (
+  `Id` int(11) NOT NULL,
+  `EtelId` int(11) NOT NULL,
+  `RendelesId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rendeltetel`
+--
+
+INSERT INTO `rendeltetel` (`Id`, `EtelId`, `RendelesId`) VALUES
+(1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -159,23 +245,58 @@ INSERT INTO `varosok` (`Id`, `Nev`, `indexKep`) VALUES
 --
 
 --
+-- Indexes for table `chain`
+--
+ALTER TABLE `chain`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Nev` (`Nev`);
+
+--
 -- Indexes for table `etelek`
 --
 ALTER TABLE `etelek`
-  ADD KEY `etteremId` (`etteremId`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `nev` (`nev`),
+  ADD KEY `etteremId` (`ChainId`);
 
 --
 -- Indexes for table `ettermek`
 --
 ALTER TABLE `ettermek`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `varosId` (`varosId`);
+  ADD KEY `varosId` (`varosId`),
+  ADD KEY `ChainId` (`ChainId`);
+
+--
+-- Indexes for table `excludedetel`
+--
+ALTER TABLE `excludedetel`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `EtelId` (`EtelId`,`EtteremId`),
+  ADD KEY `EtteremId` (`EtteremId`);
 
 --
 -- Indexes for table `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Email` (`Email`),
+  ADD KEY `VarosId` (`VarosId`);
+
+--
+-- Indexes for table `rendeles`
+--
+ALTER TABLE `rendeles`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `FelhasznaloId` (`FelhasznaloId`);
+
+--
+-- Indexes for table `rendeltetel`
+--
+ALTER TABLE `rendeltetel`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `EtelId` (`EtelId`,`RendelesId`),
+  ADD KEY `RendelesId` (`RendelesId`);
 
 --
 -- Indexes for table `varosok`
@@ -188,16 +309,46 @@ ALTER TABLE `varosok`
 --
 
 --
+-- AUTO_INCREMENT for table `chain`
+--
+ALTER TABLE `chain`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `etelek`
+--
+ALTER TABLE `etelek`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `ettermek`
 --
 ALTER TABLE `ettermek`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
+-- AUTO_INCREMENT for table `excludedetel`
+--
+ALTER TABLE `excludedetel`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
   MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `rendeles`
+--
+ALTER TABLE `rendeles`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `rendeltetel`
+--
+ALTER TABLE `rendeltetel`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `varosok`
@@ -213,13 +364,40 @@ ALTER TABLE `varosok`
 -- Constraints for table `etelek`
 --
 ALTER TABLE `etelek`
-  ADD CONSTRAINT `etelek_ibfk_1` FOREIGN KEY (`etteremId`) REFERENCES `ettermek` (`Id`);
+  ADD CONSTRAINT `etelek_ibfk_1` FOREIGN KEY (`ChainId`) REFERENCES `chain` (`Id`);
 
 --
 -- Constraints for table `ettermek`
 --
 ALTER TABLE `ettermek`
-  ADD CONSTRAINT `ettermek_ibfk_1` FOREIGN KEY (`varosId`) REFERENCES `varosok` (`Id`);
+  ADD CONSTRAINT `ettermek_ibfk_1` FOREIGN KEY (`varosId`) REFERENCES `varosok` (`Id`),
+  ADD CONSTRAINT `ettermek_ibfk_2` FOREIGN KEY (`ChainId`) REFERENCES `chain` (`Id`);
+
+--
+-- Constraints for table `excludedetel`
+--
+ALTER TABLE `excludedetel`
+  ADD CONSTRAINT `excludedetel_ibfk_1` FOREIGN KEY (`EtteremId`) REFERENCES `ettermek` (`Id`),
+  ADD CONSTRAINT `excludedetel_ibfk_2` FOREIGN KEY (`EtelId`) REFERENCES `etelek` (`Id`);
+
+--
+-- Constraints for table `felhasznalok`
+--
+ALTER TABLE `felhasznalok`
+  ADD CONSTRAINT `felhasznalok_ibfk_1` FOREIGN KEY (`VarosId`) REFERENCES `varosok` (`Id`);
+
+--
+-- Constraints for table `rendeles`
+--
+ALTER TABLE `rendeles`
+  ADD CONSTRAINT `rendeles_ibfk_1` FOREIGN KEY (`FelhasznaloId`) REFERENCES `felhasznalok` (`Id`);
+
+--
+-- Constraints for table `rendeltetel`
+--
+ALTER TABLE `rendeltetel`
+  ADD CONSTRAINT `rendeltetel_ibfk_1` FOREIGN KEY (`RendelesId`) REFERENCES `rendeles` (`Id`),
+  ADD CONSTRAINT `rendeltetel_ibfk_2` FOREIGN KEY (`EtelId`) REFERENCES `etelek` (`Id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
