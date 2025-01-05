@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2025 at 08:58 PM
+-- Generation Time: Jan 05, 2025 at 04:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -217,7 +217,7 @@ INSERT INTO `rendeltetel` (`Id`, `EtelId`, `RendelesId`) VALUES
 CREATE TABLE `varosok` (
   `Id` int(11) NOT NULL,
   `Nev` varchar(32) NOT NULL,
-  `indexKep` varchar(64) NOT NULL
+  `indexKep` varchar(224) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -225,7 +225,7 @@ CREATE TABLE `varosok` (
 --
 
 INSERT INTO `varosok` (`Id`, `Nev`, `indexKep`) VALUES
-(1, 'Budapest', ''),
+(1, 'Budapest', 'https://a.eu.mktgcdn.com/f/100004519/5QlR-I7B4XyrnISxsKAEEu-wWKUlrRii4yA9x1-4nlc.jpg'),
 (2, 'Miskolc', ''),
 (3, 'Debrecen', ''),
 (4, 'Győr', ''),
