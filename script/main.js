@@ -161,6 +161,25 @@ function login(){
             </div>`
 }
 
+function Welcome(){
+    document.getElementById("body_elements").innerHTML = `
+    <h2>${language[currLang][8]}</h2>
+    <p>${language[currLang][12]}</p>
+    <h3>${language[currLang][9]}</h3>
+    <p>${language[currLang][13]}</p>
+    <h3 class="test" onclick="Cities()">${language[currLang][10]}</h3>
+    <p>${language[currLang][14]}</p>
+    <h3>${language[currLang][11]}</h3>
+    <p>${language[currLang][15]}</p>
+    <ul>
+        <li>${language[currLang][16]}</li>
+        <li>${language[currLang][17]}</li>
+        <li>${language[currLang][18]}</li>
+        <li>${language[currLang][19]}</li>
+    </ul>
+    `;
+}
+
 function MainPageLink()
 {
     document.getElementById("nav_elements").innerHTML = `
@@ -178,25 +197,10 @@ function MainPageLink()
                 </select></li>
                 <li id="register" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">${language[currLang][1]}</li>
                 <li id="login" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">${language[currLang][0]}</li>
-                <li id="main_page" class="nav_selected">${language[currLang][6]}</li>
+                <li id="main_page" class="nav_selected" onclick="Welcome()">${language[currLang][6]}</li>
             </ul>
         `;
-    document.getElementById("body_elements").innerHTML = `
-    <h2>${language[currLang][8]}</h2>
-    <p>${language[currLang][12]}</p>
-    <h3>${language[currLang][9]}</h3>
-    <p>${language[currLang][13]}</p>
-    <h3>${language[currLang][10]}</h3>
-    <p>${language[currLang][14]}</p>
-    <h3>${language[currLang][11]}</h3>
-    <p>${language[currLang][15]}</p>
-    <ul>
-        <li>${language[currLang][16]}</li>
-        <li>${language[currLang][17]}</li>
-        <li>${language[currLang][18]}</li>
-        <li>${language[currLang][19]}</li>
-    </ul>
-    `;
+
     document.getElementById("footer_elements").innerHTML = `
         <p>${language[currLang][7]}</p>
     `;
@@ -231,5 +235,60 @@ function MainPageLink()
     document.getElementById("login").addEventListener("click",login)
 }
 
+async function Cities() {
+    await fetch("https://localhost:7106/Varosok/GetVarosokAsync", {method:"GET"})
+    .then(res => res.json())
+    .then(data => {
+        let code =``;
+        data.forEach(e => {
+            code+=`
+            <div class="circle" style="background-image: url('${e.indexKep}');" onclick="Restaurants(${e.id})">
+                <h3>${e.nev}<h3>
+            </div>
+            `
+        });
+        document.getElementById("body_elements").innerHTML = code;
+    })
+}
+
+async function Restaurants(city) {
+    await fetch("https://localhost:7106/Ettermek/GetEttermekAsync", {method:"GET"})
+    .then(res => res.json())
+    .then(data => {
+        let code =``;
+        data.forEach(e => {
+            if(e.varosId === city)
+                {
+                    code+=`
+                <div class="box" style="background-image: url('${e.indexkep}');" onclick="Foods(${e.chainId})">
+                    <h3>${e.chain.nev}<h3>
+                </div>
+                `
+            }
+        });
+        document.getElementById("body_elements").innerHTML = code;
+    })
+}
+
+async function Foods(restaurant) {
+    await fetch("https://localhost:7106/Etelek/GetEtelekAsync", {method:"GET"})
+    .then(res => res.json())
+    .then(data => {
+        let code =``;
+        data.forEach(e => {
+            if(e.chainId === restaurant)
+                {
+                    code+=`
+                <div class="longBox" style="background-image: url('${e.indexkep}');">
+                    <h3>${e.nev}<h3>
+                </div>
+                `
+            }
+        });
+        document.getElementById("body_elements").innerHTML = code;
+    })
+}
+
 MainPageLink();
 languageselect();
+Welcome();

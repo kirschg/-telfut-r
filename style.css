@@ -150,14 +150,121 @@ article h2
     background-image: url("https://i.imgur.com/9lwyCJD.gif");
 }
 
+.test{
+    height: fit-content;
+    width: fit-content;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-size: 40pt;
+    font-family: monospace;
+    color: antiquewhite;
+    background-color: #b2001e;
+    margin: auto;
+}
+
+.test:hover{
+    background-color: hsl(0, 0%, 10%);
+    cursor: pointer;
+}
+
+.circle{
+    border-radius: 250px;
+    width: 250px;
+    height: 250px;
+    background-color: #b2001e;
+    background-size: cover;
+    color: white;
+    float: left;
+    margin: 25px;
+    text-align: center;
+    text-shadow: 2px 2px black;
+    
+}
+
+.circle h3{
+    line-height: 250px;
+}
+
+.circle:hover{
+    border-radius: 270px;
+    width: 270px;
+    height: 270px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.box{
+    border-radius: 20px;
+    width: 250px;
+    height: 250px;
+    background-color: #b2001e;
+    background-size: cover;
+    color: white;
+    float: left;
+    margin: 25px;
+    text-align: center;
+    text-shadow: 2px 2px black;
+    
+}
+
+.box h3{
+    line-height: 250px;
+}
+
+.box:hover{
+    border-radius: 20px;
+    width: 270px;
+    height: 270px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.longBox{
+    border-radius: 20px;
+    width: 390px;
+    height: 250px;
+    background-color: #b2001e;
+    background-size: cover;
+    color: white;
+    float: left;
+    margin: 25px;
+    text-align: center;
+    text-shadow: 2px 2px black;
+    
+}
+
+.longBox h3{
+    line-height: 250px;
+}
+
+.longBox:hover{
+    border-radius: 20px;
+    width: 410px;
+    height: 270px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
 /*footer*/
 footer {
     text-align: center;
     padding: 3px;
-    background-color: #b2001e;
+    background-color: #b3001e;
     color: white;
     width: 100%;
     bottom: 0;
+    float: left;
 }
 
 footer * {
