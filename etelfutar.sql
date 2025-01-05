@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2025 at 04:12 PM
+-- Generation Time: Jan 05, 2025 at 04:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -226,19 +226,19 @@ CREATE TABLE `varosok` (
 
 INSERT INTO `varosok` (`Id`, `Nev`, `indexKep`) VALUES
 (1, 'Budapest', 'https://a.eu.mktgcdn.com/f/100004519/5QlR-I7B4XyrnISxsKAEEu-wWKUlrRii4yA9x1-4nlc.jpg'),
-(2, 'Miskolc', ''),
-(3, 'Debrecen', ''),
-(4, 'Győr', ''),
-(5, 'Szombathely', ''),
-(6, 'Sopron', ''),
-(7, 'Kecskemét', ''),
-(8, 'Pécs', ''),
-(9, 'Szeged', ''),
-(10, 'Nyíregyháza', ''),
-(11, 'Budakalász', ''),
-(12, 'Budaörs', ''),
-(13, 'Gödöllő', ''),
-(14, 'Szentendre', '');
+(2, 'Miskolc', 'https://travelking.cdn.it7.sk/deadpool/deal-listing/468/9530-oVg5.jpg'),
+(3, 'Debrecen', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Debrecen_f%C5%91t%C3%A9r_2009.jpg/1200px-Debrecen_f%C5%91t%C3%A9r_2009.jpg'),
+(4, 'Győr', 'https://admissions.sze.hu/images/Photos/gyor-transformed-transformed.jpeg'),
+(5, 'Szombathely', 'https://static.345.hu/varoskepek/dc5a7f270d71b419b92150459bff9ddb.jpg'),
+(6, 'Sopron', 'https://upload.wikimedia.org/wikipedia/commons/5/50/Storno-h%C3%A1z_T%C5%B1ztorony_%C3%A9s_V%C3%A1rosh%C3%A1za.jpg'),
+(7, 'Kecskemét', 'https://upload.wikimedia.org/wikipedia/commons/6/6b/V%C3%A1rosi_Tan%C3%A1csh%C3%A1z_%282253._sz%C3%A1m%C3%BA_m%C5%B1eml%C3%A9k%29_4.jpg'),
+(8, 'Pécs', 'https://traveladdict.hu/wp-content/uploads/2021/08/IMG_9648.jpg'),
+(9, 'Szeged', 'https://www.szeretlekmagyarorszag.hu/wp-content/uploads/2019/07/szeged-szegedcity-suncity-helloszeged-iloveszeged-50-1.jpg'),
+(10, 'Nyíregyháza', 'https://mihalygabor-utazasai.hu/wp-content/uploads/2020/10/IMG_2023-07-25-093029-1024x768.jpeg'),
+(11, 'Budakalász', 'https://www.pilisinfo.hu/imagebase/4a14a444/11062358_784192214983981_3585371202711634487_n.jpg'),
+(12, 'Budaörs', 'https://i.szalas.hu/pois/8325/500x500/28268.jpg'),
+(13, 'Gödöllő', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Schloss_G%C3%B6d%C3%B6ll%C5%91_Ungarn.jpg/1200px-Schloss_G%C3%B6d%C3%B6ll%C5%91_Ungarn.jpg'),
+(14, 'Szentendre', 'https://felfedezok.hu/wp-content/uploads/2023/05/city-g58e10c678_1280-e1685002574358.jpg');
 
 --
 -- Indexes for dumped tables
