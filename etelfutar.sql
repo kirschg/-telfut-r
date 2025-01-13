@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2025 at 05:18 PM
+-- Generation Time: Jan 13, 2025 at 10:03 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,6 +45,20 @@ INSERT INTO `chain` (`Id`, `Nev`) VALUES
 (5, 'Lángos Ház'),
 (3, 'Mcdonalds'),
 (4, 'Papa Joe Saloon & Steakhouse');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ertekelesek`
+--
+
+CREATE TABLE `ertekelesek` (
+  `Id` int(11) NOT NULL,
+  `FelhasznaloId` int(11) NOT NULL,
+  `EtteremId` int(11) NOT NULL,
+  `Szoveg` varchar(255) NOT NULL,
+  `Ertekeles` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -160,15 +174,16 @@ CREATE TABLE `felhasznalok` (
   `VarosId` int(11) NOT NULL,
   `Lakcim` varchar(64) NOT NULL,
   `Hash` varchar(64) NOT NULL,
-  `Salt` varchar(64) NOT NULL
+  `Salt` varchar(64) NOT NULL,
+  `Jogosultsag` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `felhasznalok`
 --
 
-INSERT INTO `felhasznalok` (`Id`, `FelhasznaloNev`, `Email`, `VarosId`, `Lakcim`, `Hash`, `Salt`) VALUES
-(1, 'Takács László', 'takacslaci@gmail.com', 1, 'Petőfi Utca 29', '', '');
+INSERT INTO `felhasznalok` (`Id`, `FelhasznaloNev`, `Email`, `VarosId`, `Lakcim`, `Hash`, `Salt`, `Jogosultsag`) VALUES
+(1, 'Takács László', 'takacslaci@gmail.com', 1, 'Petőfi Utca 29', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -252,6 +267,13 @@ ALTER TABLE `chain`
   ADD UNIQUE KEY `Nev` (`Nev`);
 
 --
+-- Indexes for table `ertekelesek`
+--
+ALTER TABLE `ertekelesek`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `FelhasznaloId` (`FelhasznaloId`,`EtteremId`);
+
+--
 -- Indexes for table `etelek`
 --
 ALTER TABLE `etelek`
@@ -313,6 +335,12 @@ ALTER TABLE `varosok`
 --
 ALTER TABLE `chain`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `ertekelesek`
+--
+ALTER TABLE `ertekelesek`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `etelek`
