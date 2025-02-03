@@ -1,0 +1,219 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+
+namespace EtelfutarAPI.Models;
+
+public partial class EtelfutarContext : DbContext
+{
+    public EtelfutarContext()
+    {
+    }
+
+    public EtelfutarContext(DbContextOptions<EtelfutarContext> options)
+        : base(options)
+    {
+    }
+
+    public virtual DbSet<Chain> Chains { get; set; }
+
+    public virtual DbSet<Etelek> Eteleks { get; set; }
+
+    public virtual DbSet<Ettermek> Ettermeks { get; set; }
+
+    public virtual DbSet<Excludedetel> Excludedetels { get; set; }
+
+    public virtual DbSet<Felhasznalok> Felhasznaloks { get; set; }
+
+    public virtual DbSet<Rendeles> Rendeles { get; set; }
+
+    public virtual DbSet<Rendeltetel> Rendeltetels { get; set; }
+
+    public virtual DbSet<Varosok> Varosoks { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySQL("SERVER=localhost;PORT=3306;DATABASE=etelfutar;USER=root;PASSWORD=;SSL MODE=none;");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Chain>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("chain");
+
+            entity.HasIndex(e => e.Nev, "Nev").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Nev).HasMaxLength(64);
+        });
+
+        modelBuilder.Entity<Etelek>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("etelek");
+
+            entity.HasIndex(e => e.ChainId, "etteremId");
+
+            entity.HasIndex(e => e.Nev, "nev").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Ar)
+                .HasColumnType("int(11)")
+                .HasColumnName("ar");
+            entity.Property(e => e.ChainId).HasColumnType("int(11)");
+            entity.Property(e => e.Indexkep).HasMaxLength(224);
+            entity.Property(e => e.Kaloria)
+                .HasColumnType("int(11)")
+                .HasColumnName("kaloria");
+            entity.Property(e => e.Nev)
+                .HasMaxLength(32)
+                .HasColumnName("nev");
+
+            entity.HasOne(d => d.Chain).WithMany(p => p.Eteleks)
+                .HasForeignKey(d => d.ChainId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("etelek_ibfk_1");
+        });
+
+        modelBuilder.Entity<Ettermek>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("ettermek");
+
+            entity.HasIndex(e => e.ChainId, "ChainId");
+
+            entity.HasIndex(e => e.VarosId, "varosId");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.ChainId).HasColumnType("int(11)");
+            entity.Property(e => e.Cim).HasMaxLength(32);
+            entity.Property(e => e.Indexkep).HasMaxLength(224);
+            entity.Property(e => e.VarosId)
+                .HasColumnType("int(11)")
+                .HasColumnName("varosId");
+
+            entity.HasOne(d => d.Chain).WithMany(p => p.Ettermeks)
+                .HasForeignKey(d => d.ChainId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("ettermek_ibfk_2");
+
+            entity.HasOne(d => d.Varos).WithMany(p => p.Ettermeks)
+                .HasForeignKey(d => d.VarosId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("ettermek_ibfk_1");
+        });
+
+        modelBuilder.Entity<Excludedetel>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("excludedetel");
+
+            entity.HasIndex(e => new { e.EtelId, e.EtteremId }, "EtelId");
+
+            entity.HasIndex(e => e.EtteremId, "EtteremId");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.EtelId).HasColumnType("int(11)");
+            entity.Property(e => e.EtteremId).HasColumnType("int(11)");
+
+            entity.HasOne(d => d.Etel).WithMany(p => p.Excludedetels)
+                .HasForeignKey(d => d.EtelId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("excludedetel_ibfk_2");
+
+            entity.HasOne(d => d.Etterem).WithMany(p => p.Excludedetels)
+                .HasForeignKey(d => d.EtteremId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("excludedetel_ibfk_1");
+        });
+
+        modelBuilder.Entity<Felhasznalok>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("felhasznalok");
+
+            entity.HasIndex(e => e.Email, "Email").IsUnique();
+
+            entity.HasIndex(e => e.VarosId, "VarosId");
+
+            entity.Property(e => e.Id).HasColumnType("int(255)");
+            entity.Property(e => e.Email).HasMaxLength(64);
+            entity.Property(e => e.FelhasznaloNev).HasMaxLength(32);
+            entity.Property(e => e.Hash).HasMaxLength(64);
+            entity.Property(e => e.Lakcim).HasMaxLength(64);
+            entity.Property(e => e.Salt).HasMaxLength(64);
+            entity.Property(e => e.VarosId).HasColumnType("int(11)");
+
+            entity.HasOne(d => d.Varos).WithMany(p => p.Felhasznaloks)
+                .HasForeignKey(d => d.VarosId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("felhasznalok_ibfk_1");
+        });
+
+        modelBuilder.Entity<Rendeles>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("rendeles");
+
+            entity.HasIndex(e => e.FelhasznaloId, "FelhasznaloId");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.FelhasznaloId).HasColumnType("int(11)");
+            entity.Property(e => e.OsszAr).HasColumnType("int(11)");
+
+            entity.HasOne(d => d.Felhasznalo).WithMany(p => p.Rendeles)
+                .HasForeignKey(d => d.FelhasznaloId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("rendeles_ibfk_1");
+        });
+
+        modelBuilder.Entity<Rendeltetel>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("rendeltetel");
+
+            entity.HasIndex(e => new { e.EtelId, e.RendelesId }, "EtelId");
+
+            entity.HasIndex(e => e.RendelesId, "RendelesId");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.EtelId).HasColumnType("int(11)");
+            entity.Property(e => e.RendelesId).HasColumnType("int(11)");
+
+            entity.HasOne(d => d.Etel).WithMany(p => p.Rendeltetels)
+                .HasForeignKey(d => d.EtelId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("rendeltetel_ibfk_2");
+
+            entity.HasOne(d => d.Rendeles).WithMany(p => p.Rendeltetels)
+                .HasForeignKey(d => d.RendelesId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("rendeltetel_ibfk_1");
+        });
+
+        modelBuilder.Entity<Varosok>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("varosok");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.IndexKep)
+                .HasMaxLength(64)
+                .HasColumnName("indexKep");
+            entity.Property(e => e.Nev).HasMaxLength(32);
+        });
+
+        OnModelCreatingPartial(modelBuilder);
+    }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+}
