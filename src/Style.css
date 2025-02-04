@@ -1,0 +1,65 @@
+/*
+
+Classes
+
+*/
+
+.constant {
+  background-image: url("img/header.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+  padding: 30px;
+  background-position: bottom;
+  text-shadow: 1px 1px black;
+  text-decoration: none;
+  color: white;
+}
+
+.constant a:hover{
+  text-shadow: 2px 2px black;
+  cursor: pointer;
+}
+
+.nav{
+  flex-direction: row;
+  list-style-type: none;
+  background-color: hsl(0, 0%, 25%);
+  color: hsl(0, 0%, 100%);
+  border-bottom: 2px black solid;
+  width: 100%;
+}
+
+.nav li{
+  margin-left: auto;
+  display: block;
+  padding: 15px;
+  text-align: center;
+}
+
+.nav li:hover {
+  cursor: pointer;
+  background-color: hsl(0, 0%, 15%);;
+}
+
+/*
+
+Ids
+
+*/
+
+/*
+
+Tags
+
+*/
+
+select{
+  background-color: hsl(0, 0%, 25%);
+  border: none;
+  color: white;
+  padding: 15px;
+}
+
+select:hover{
+  background-color: hsl(0, 0%, 15%);;
+}
