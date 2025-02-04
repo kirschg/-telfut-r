@@ -8,7 +8,7 @@ function App() {
       <header className="constant">
         <h1>Ételfutár®</h1>
       </header>
-        <nav>
+        <nav style={{backgroundColor:"hsl(0, 0%, 25%)",borderBottom:"2px black solid"}}>
         <ul className="nav">
           <li data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-basket2-fill" viewBox="0 0 16 16">

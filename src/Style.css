@@ -10,23 +10,22 @@ Classes
   background-size:cover;
   padding: 30px;
   background-position: bottom;
-  text-shadow: 1px 1px black;
+  text-shadow: 1px 1px hsl(0, 0%, 0%);
   text-decoration: none;
-  color: white;
+  color: hsl(0, 0%, 100%);
 }
 
-.constant a:hover{
-  text-shadow: 2px 2px black;
+.constant h1:hover{
+  text-shadow: 2px 2px hsl(0, 0%, 0%);
   cursor: pointer;
 }
 
 .nav{
-  flex-direction: row;
+  flex-direction:row-reverse;
   list-style-type: none;
-  background-color: hsl(0, 0%, 25%);
   color: hsl(0, 0%, 100%);
-  border-bottom: 2px black solid;
-  width: 100%;
+  width:fit-content;
+  margin-left: auto;
 }
 
 .nav li{
@@ -38,7 +37,15 @@ Classes
 
 .nav li:hover {
   cursor: pointer;
-  background-color: hsl(0, 0%, 15%);;
+  background-color: hsl(0, 0%, 15%);
+}
+
+.footer{
+  text-align: center;
+    padding: 3px;
+    background-color: hsl(350, 100%, 35%);
+    color: hsl(0, 0%, 100%);
+    width: 100%;
 }
 
 /*
@@ -56,10 +63,10 @@ Tags
 select{
   background-color: hsl(0, 0%, 25%);
   border: none;
-  color: white;
+  color: hsl(0, 0%, 100%);
   padding: 15px;
 }
 
 select:hover{
-  background-color: hsl(0, 0%, 15%);;
+  background-color: hsl(0, 0%, 15%);
 }
