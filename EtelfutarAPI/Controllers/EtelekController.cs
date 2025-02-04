@@ -101,5 +101,21 @@ namespace EtelfutarAPI.Controllers
                 }
             }
         }
+        [HttpGet("GetEtelekByEtterem")]
+        public async Task<IActionResult> GetEtelekByEtterem(string etterem)
+        {
+            using (var context = new EtelfutarContext())
+            {
+                List<Etelek> etelek = await context.Eteleks.Where(e => e.Chain.Nev == etterem).Include(x => x.Chain).ToListAsync();
+                if (etelek.Count != 0)
+                {
+                    return Ok(etelek);
+                }
+                else
+                {
+                    return NotFound("Nincs ilyen étterem!");
+                }
+            }
+        }
     }
 }

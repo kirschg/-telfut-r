@@ -101,5 +101,21 @@ namespace EtelfutarAPI.Controllers
                 }
             }
         }
+        [HttpGet("GetEttermekByVaros")]
+        public async Task<IActionResult> GetEttermekByVaros(string varos)
+        {
+            using (var context = new EtelfutarContext())
+            {
+                List<Ettermek> ettermek = await context.Ettermeks.Where(e => e.Varos.Nev == varos).Include(x => x.Varos).Include(x => x.Chain).ToListAsync();
+                if(ettermek.Count != 0)
+                {
+                    return Ok(ettermek);
+                }
+                else
+                {
+                    return NotFound("Nincs ilyen város!");
+                }
+            }
+        }
     }
 }
