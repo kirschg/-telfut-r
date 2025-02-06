@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.css";
+import { Link } from "react-router-dom";
 import '../Style.css';
 
 function Home() {
@@ -10,7 +11,7 @@ function Home() {
         <h3>Akciók és kedvezmények</h3>
         <p>Ne felejts el körülnézni aktuális akcióink között! Rendszeresen kínálunk kedvezményeket és különleges ajánlatokat, hogy még jobban kihasználhasd a Ételfutár® előnyeit.</p>
 
-        <h3>Rendelj Most!</h3>
+        <h3 style={{margin:"auto", width:"fit-content", marginBottom:"10px"}}><Link to="/Cities" className="button">Rendelj Most!</Link></h3>
 
         <p>Legyen szó egy családi vacsoráról, baráti összejövetelről vagy csak egy egyszerű ebédről, a Ételfutár® a tökéletes választás számodra! Kényeztesd magad a legfinomabb magyar ételekkel, és tapasztald meg a gyors és megbízható kiszállítást.</p>
         <h3>Miért rendeljen tőlünk?</h3>

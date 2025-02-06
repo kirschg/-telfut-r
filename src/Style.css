@@ -31,13 +31,22 @@ Classes
 .nav li{
   margin-left: auto;
   display: block;
-  padding: 15px;
   text-align: center;
+  padding-top: 15px;
+}
+.nav li *{
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
+  padding: 15px;
 }
 
 .nav li:hover {
   cursor: pointer;
   background-color: hsl(0, 0%, 15%);
+}
+
+.selected{
+  background-color: hsl(350, 100%, 35%);
 }
 
 .footer{
@@ -46,6 +55,44 @@ Classes
     background-color: hsl(350, 100%, 35%);
     color: hsl(0, 0%, 100%);
     width: 100%;
+}
+
+.button{
+  display: inline-block;
+  width: fit-content;
+  text-align: center;
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  padding: 12px;
+  background-color: hsl(350, 100%, 35%);
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.button:hover{
+  background-color: hsl(350, 100%, 25%);
+  cursor: pointer;
+}
+
+.city{
+  position: relative;
+  background-color: hsl(350, 100%, 35%);
+  background-size: cover;
+  width: 250px;
+  height: 250px;
+  border-radius:100%;
+  text-align: center;
+  text-shadow: 2px 2px black;
+  display: inline-block;
+}
+
+.city *{
+  position: absolute;
+  left: 50%; 
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
 }
 
 /*
