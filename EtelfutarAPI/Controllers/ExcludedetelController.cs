@@ -9,32 +9,18 @@ namespace EtelfutarAPI.Controllers
     [ApiController]
     public class ExcludedetelController : Controller
     {
-        [HttpGet("GetExcludedetelekAsync")]
-        public async Task<IActionResult> GetExcludedetelekAsync()
-        {
-            using (var context = new EtelfutarContext())
-            {
-                try
-                {
-                    List<Excludedetel> result = await context.Excludedetels.Include(x=>x.Etel).Include(x => x.Etterem).ToListAsync();
-                    return Ok(result);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-        }
         [HttpPost("PostExcludedetelAsync")]
-        public async Task<IActionResult> PostExcludedetelAsync(Excludedetel ujExcludedetel)
+        public async Task<IActionResult> PostExcludedetelAsync(int etteremId, int etelId)
         {
             using (var context = new EtelfutarContext())
             {
                 try
                 {
-                    if (ujExcludedetel is not null)
+                    Etelek kapcsolat = context.Eteleks.FirstOrDefaultAsync(x => x.Id == etelId).Result;
+                    Ettermek kapcsolo = context.Ettermeks.FirstOrDefaultAsync(x => x.Id == etteremId).Result;
+                    if (kapcsolat is not null && kapcsolo is not null)
                     {
-                        await context.Excludedetels.AddAsync(ujExcludedetel);
+                        kapcsolo.Etels.Add(kapcsolat);
                         await context.SaveChangesAsync();
                         return Ok("Sikeres mentés");
                     }
@@ -49,50 +35,24 @@ namespace EtelfutarAPI.Controllers
                 }
             }
         }
-        [HttpPut("PutExcludedetelAsync")]
-        public async Task<IActionResult> PutExcludedetelAsync(Excludedetel modExcludedetel)
-        {
-            using (var context = new EtelfutarContext())
-            {
-                try
-                {
-                    if (context.Excludedetels.Contains(modExcludedetel))
-                    {
-                        context.Excludedetels.Update(modExcludedetel);
-                        await context.SaveChangesAsync();
-                        return Ok("Sikeres módosítás.");
-                    }
-                    else
-                    {
-                        return NotFound("Üres objektumot kaptam!");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-        }
         [HttpDelete("DeleteExcludedetelAsync")]
-        public async Task<IActionResult> DeleteExcludedetelAsync(int id)
+        public async Task<IActionResult> DeleteExcludedetelAsync(int etteremId, int etelId)
         {
             using (var context = new EtelfutarContext())
             {
                 try
                 {
-                    Excludedetel torlendo = new Excludedetel
+                    Etelek torlendo = context.Eteleks.FirstOrDefaultAsync(x=> x.Id == etelId).Result;
+                    Ettermek torlo = context.Ettermeks.FirstOrDefaultAsync(x=> x.Id == etteremId).Result;
+                    if (torlendo is not null && torlo is not null)
                     {
-                        Id = id
-                    };
-                    if (context.Excludedetels.Contains(torlendo))
-                    {
-                        context.Excludedetels.Remove(torlendo);
+                        torlo.Etels.Remove(torlendo);
                         await context.SaveChangesAsync();
                         return Ok("Sikeres törlés");
                     }
                     else
                     {
-                        return StatusCode(404, "Nincs ilyen város.");
+                        return StatusCode(404, "Nincs találat");
                     }
                 }
                 catch (Exception ex)

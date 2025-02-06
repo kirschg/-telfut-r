@@ -23,7 +23,7 @@ public partial class Felhasznalok
 
     public virtual ICollection<Ertekelesek> Ertekeleseks { get; set; } = new List<Ertekelesek>();
 
-    public virtual ICollection<Rendele> Rendeles { get; set; } = new List<Rendele>();
+    public virtual ICollection<Rendeles> Rendeles { get; set; } = new List<Rendeles>();
 
     public virtual Varosok Varos { get; set; } = null!;
 }

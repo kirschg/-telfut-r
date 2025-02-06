@@ -9,32 +9,18 @@ namespace EtelfutarAPI.Controllers
     [ApiController]
     public class RendeltetelController : Controller
     {
-        [HttpGet("GetRendeltetelekAsync")]
-        public async Task<IActionResult> GetRendeltetelekAsync()
-        {
-            using (var context = new EtelfutarContext())
-            {
-                try
-                {
-                    List<Rendeltetel> result = await context.Rendeltetels.Include(x=>x.Etel.Chain).Include(x => x.Rendeles.Felhasznalo.Varos).ToListAsync();
-                    return Ok(result);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-        }
         [HttpPost("PostRendeltetelAsync")]
-        public async Task<IActionResult> PostRendeltetelAsync(Rendeltetel ujRendeltetel)
+        public async Task<IActionResult> PostRendeltetelAsync(int etelId, int rendelesId)
         {
             using (var context = new EtelfutarContext())
             {
                 try
                 {
-                    if (ujRendeltetel is not null)
+                    Etelek kapcsolat = context.Eteleks.FirstOrDefaultAsync(x => x.Id == etelId).Result;
+                    Rendeles kapcsolo = context.Rendeles.FirstOrDefaultAsync(x => x.Id == rendelesId).Result;
+                    if (kapcsolat is not null && kapcsolo is not null)
                     {
-                        await context.Rendeltetels.AddAsync(ujRendeltetel);
+                        kapcsolo.Etels.Add(kapcsolat);
                         await context.SaveChangesAsync();
                         return Ok("Sikeres mentés");
                     }
@@ -49,50 +35,24 @@ namespace EtelfutarAPI.Controllers
                 }
             }
         }
-        [HttpPut("PutRendeltetelAsync")]
-        public async Task<IActionResult> PutRendeltetelAsync(Rendeltetel modRendeltetel)
-        {
-            using (var context = new EtelfutarContext())
-            {
-                try
-                {
-                    if (context.Rendeltetels.Contains(modRendeltetel))
-                    {
-                        context.Rendeltetels.Update(modRendeltetel);
-                        await context.SaveChangesAsync();
-                        return Ok("Sikeres módosítás.");
-                    }
-                    else
-                    {
-                        return NotFound("Üres objektumot kaptam!");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-            }
-        }
         [HttpDelete("DeleteRendeltetelAsync")]
-        public async Task<IActionResult> DeleteRendeltetelAsync(int id)
+        public async Task<IActionResult> DeleteRendeltetelAsync(int etelId, int rendelesId)
         {
             using (var context = new EtelfutarContext())
             {
                 try
                 {
-                    Rendeltetel torlendo = new Rendeltetel
+                    Etelek torlendo = context.Eteleks.FirstOrDefaultAsync(x => x.Id == etelId).Result;
+                    Rendeles torlo = context.Rendeles.FirstOrDefaultAsync(x => x.Id == rendelesId).Result;
+                    if (torlendo is not null && torlo is not null)
                     {
-                        Id = id
-                    };
-                    if (context.Rendeltetels.Contains(torlendo))
-                    {
-                        context.Rendeltetels.Remove(torlendo);
+                        torlo.Etels.Remove(torlendo);
                         await context.SaveChangesAsync();
                         return Ok("Sikeres törlés");
                     }
                     else
                     {
-                        return NotFound("Nincs ilyen város.");
+                        return StatusCode(404, "nincs találat");
                     }
                 }
                 catch (Exception ex)

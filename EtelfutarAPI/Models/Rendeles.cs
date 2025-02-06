@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EtelfutarAPI.Models;
 
-public partial class Rendele
+public partial class Rendeles
 {
     public int Id { get; set; }
 

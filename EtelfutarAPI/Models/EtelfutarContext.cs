@@ -25,7 +25,7 @@ public partial class EtelfutarContext : DbContext
 
     public virtual DbSet<Felhasznalok> Felhasznaloks { get; set; }
 
-    public virtual DbSet<Rendele> Rendeles { get; set; }
+    public virtual DbSet<Rendeles> Rendeles { get; set; }
 
     public virtual DbSet<Varosok> Varosoks { get; set; }
 
@@ -126,7 +126,7 @@ public partial class EtelfutarContext : DbContext
             entity.HasMany(d => d.Rendeles).WithMany(p => p.Etels)
                 .UsingEntity<Dictionary<string, object>>(
                     "Rendeltetel",
-                    r => r.HasOne<Rendele>().WithMany()
+                    r => r.HasOne<Rendeles>().WithMany()
                         .HasForeignKey("RendelesId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .HasConstraintName("rendeltetel_ibfk_1"),
@@ -199,7 +199,7 @@ public partial class EtelfutarContext : DbContext
                 .HasConstraintName("felhasznalok_ibfk_1");
         });
 
-        modelBuilder.Entity<Rendele>(entity =>
+        modelBuilder.Entity<Rendeles>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
