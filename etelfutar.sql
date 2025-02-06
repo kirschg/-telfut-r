@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2025 at 10:03 AM
+-- Generation Time: Feb 06, 2025 at 09:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,6 +59,13 @@ CREATE TABLE `ertekelesek` (
   `Szoveg` varchar(255) NOT NULL,
   `Ertekeles` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ertekelesek`
+--
+
+INSERT INTO `ertekelesek` (`Id`, `FelhasznaloId`, `EtteremId`, `Szoveg`, `Ertekeles`) VALUES
+(1, 1, 2, 'Nagyon fincsi! Nagyon jó!', 5);
 
 -- --------------------------------------------------------
 
@@ -156,10 +163,17 @@ INSERT INTO `ettermek` (`Id`, `Cim`, `ChainId`, `varosId`, `Indexkep`) VALUES
 --
 
 CREATE TABLE `excludedetel` (
-  `Id` int(11) NOT NULL,
   `EtelId` int(11) NOT NULL,
   `EtteremId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `excludedetel`
+--
+
+INSERT INTO `excludedetel` (`EtelId`, `EtteremId`) VALUES
+(4, 2),
+(9, 13);
 
 -- --------------------------------------------------------
 
@@ -211,7 +225,6 @@ INSERT INTO `rendeles` (`Id`, `FelhasznaloId`, `OsszAr`) VALUES
 --
 
 CREATE TABLE `rendeltetel` (
-  `Id` int(11) NOT NULL,
   `EtelId` int(11) NOT NULL,
   `RendelesId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -220,8 +233,9 @@ CREATE TABLE `rendeltetel` (
 -- Dumping data for table `rendeltetel`
 --
 
-INSERT INTO `rendeltetel` (`Id`, `EtelId`, `RendelesId`) VALUES
-(1, 2, 1);
+INSERT INTO `rendeltetel` (`EtelId`, `RendelesId`) VALUES
+(2, 1),
+(11, 1);
 
 -- --------------------------------------------------------
 
@@ -271,7 +285,8 @@ ALTER TABLE `chain`
 --
 ALTER TABLE `ertekelesek`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `FelhasznaloId` (`FelhasznaloId`,`EtteremId`);
+  ADD KEY `FelhasznaloId` (`FelhasznaloId`,`EtteremId`),
+  ADD KEY `EtteremId` (`EtteremId`);
 
 --
 -- Indexes for table `etelek`
@@ -293,7 +308,7 @@ ALTER TABLE `ettermek`
 -- Indexes for table `excludedetel`
 --
 ALTER TABLE `excludedetel`
-  ADD PRIMARY KEY (`Id`),
+  ADD PRIMARY KEY (`EtelId`,`EtteremId`),
   ADD KEY `EtelId` (`EtelId`,`EtteremId`),
   ADD KEY `EtteremId` (`EtteremId`);
 
@@ -316,7 +331,7 @@ ALTER TABLE `rendeles`
 -- Indexes for table `rendeltetel`
 --
 ALTER TABLE `rendeltetel`
-  ADD PRIMARY KEY (`Id`),
+  ADD PRIMARY KEY (`EtelId`,`RendelesId`),
   ADD KEY `EtelId` (`EtelId`,`RendelesId`),
   ADD KEY `RendelesId` (`RendelesId`);
 
@@ -340,7 +355,7 @@ ALTER TABLE `chain`
 -- AUTO_INCREMENT for table `ertekelesek`
 --
 ALTER TABLE `ertekelesek`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `etelek`
@@ -355,12 +370,6 @@ ALTER TABLE `ettermek`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT for table `excludedetel`
---
-ALTER TABLE `excludedetel`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
@@ -373,12 +382,6 @@ ALTER TABLE `rendeles`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `rendeltetel`
---
-ALTER TABLE `rendeltetel`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `varosok`
 --
 ALTER TABLE `varosok`
@@ -387,6 +390,13 @@ ALTER TABLE `varosok`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `ertekelesek`
+--
+ALTER TABLE `ertekelesek`
+  ADD CONSTRAINT `ertekelesek_ibfk_1` FOREIGN KEY (`FelhasznaloId`) REFERENCES `felhasznalok` (`Id`),
+  ADD CONSTRAINT `ertekelesek_ibfk_2` FOREIGN KEY (`EtteremId`) REFERENCES `ettermek` (`Id`);
 
 --
 -- Constraints for table `etelek`
