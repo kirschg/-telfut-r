@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2025 at 09:06 AM
+-- Generation Time: Feb 06, 2025 at 10:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -202,6 +202,26 @@ INSERT INTO `felhasznalok` (`Id`, `FelhasznaloNev`, `Email`, `VarosId`, `Lakcim`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `learazas`
+--
+
+CREATE TABLE `learazas` (
+  `EtteremId` int(11) NOT NULL,
+  `EtelId` int(11) NOT NULL,
+  `Learazas` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `learazas`
+--
+
+INSERT INTO `learazas` (`EtteremId`, `EtelId`, `Learazas`) VALUES
+(13, 8, 30),
+(21, 11, 50);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rendeles`
 --
 
@@ -321,6 +341,13 @@ ALTER TABLE `felhasznalok`
   ADD KEY `VarosId` (`VarosId`);
 
 --
+-- Indexes for table `learazas`
+--
+ALTER TABLE `learazas`
+  ADD PRIMARY KEY (`EtelId`,`EtteremId`),
+  ADD UNIQUE KEY `EtteremId` (`EtteremId`,`EtelId`);
+
+--
 -- Indexes for table `rendeles`
 --
 ALTER TABLE `rendeles`
@@ -423,6 +450,13 @@ ALTER TABLE `excludedetel`
 --
 ALTER TABLE `felhasznalok`
   ADD CONSTRAINT `felhasznalok_ibfk_1` FOREIGN KEY (`VarosId`) REFERENCES `varosok` (`Id`);
+
+--
+-- Constraints for table `learazas`
+--
+ALTER TABLE `learazas`
+  ADD CONSTRAINT `learazas_ibfk_1` FOREIGN KEY (`EtteremId`) REFERENCES `ettermek` (`Id`),
+  ADD CONSTRAINT `learazas_ibfk_2` FOREIGN KEY (`EtelId`) REFERENCES `etelek` (`Id`);
 
 --
 -- Constraints for table `rendeles`
