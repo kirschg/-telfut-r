@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace EtelfutarAPI.Models;
 
-public partial class Rendeles
+public partial class Rendele
 {
     public int Id { get; set; }
 
@@ -14,6 +13,5 @@ public partial class Rendeles
 
     public virtual Felhasznalok Felhasznalo { get; set; } = null!;
 
-    [JsonIgnore]
-    public virtual ICollection<Rendeltetel> Rendeltetels { get; set; } = new List<Rendeltetel>();
+    public virtual ICollection<Etelek> Etels { get; set; } = new List<Etelek>();
 }

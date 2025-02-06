@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace EtelfutarAPI.Models;
 
@@ -18,8 +17,9 @@ public partial class Ettermek
 
     public virtual Chain Chain { get; set; } = null!;
 
-    [JsonIgnore]
-    public virtual ICollection<Excludedetel> Excludedetels { get; set; } = new List<Excludedetel>();
+    public virtual ICollection<Ertekelesek> Ertekeleseks { get; set; } = new List<Ertekelesek>();
 
     public virtual Varosok Varos { get; set; } = null!;
+
+    public virtual ICollection<Etelek> Etels { get; set; } = new List<Etelek>();
 }

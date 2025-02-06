@@ -17,17 +17,15 @@ public partial class EtelfutarContext : DbContext
 
     public virtual DbSet<Chain> Chains { get; set; }
 
+    public virtual DbSet<Ertekelesek> Ertekeleseks { get; set; }
+
     public virtual DbSet<Etelek> Eteleks { get; set; }
 
     public virtual DbSet<Ettermek> Ettermeks { get; set; }
 
-    public virtual DbSet<Excludedetel> Excludedetels { get; set; }
-
     public virtual DbSet<Felhasznalok> Felhasznaloks { get; set; }
 
-    public virtual DbSet<Rendeles> Rendeles { get; set; }
-
-    public virtual DbSet<Rendeltetel> Rendeltetels { get; set; }
+    public virtual DbSet<Rendele> Rendeles { get; set; }
 
     public virtual DbSet<Varosok> Varosoks { get; set; }
 
@@ -47,6 +45,33 @@ public partial class EtelfutarContext : DbContext
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.Nev).HasMaxLength(64);
+        });
+
+        modelBuilder.Entity<Ertekelesek>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("ertekelesek");
+
+            entity.HasIndex(e => e.EtteremId, "EtteremId");
+
+            entity.HasIndex(e => new { e.FelhasznaloId, e.EtteremId }, "FelhasznaloId");
+
+            entity.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Ertekeles).HasColumnType("int(1)");
+            entity.Property(e => e.EtteremId).HasColumnType("int(11)");
+            entity.Property(e => e.FelhasznaloId).HasColumnType("int(11)");
+            entity.Property(e => e.Szoveg).HasMaxLength(255);
+
+            entity.HasOne(d => d.Etterem).WithMany(p => p.Ertekeleseks)
+                .HasForeignKey(d => d.EtteremId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("ertekelesek_ibfk_2");
+
+            entity.HasOne(d => d.Felhasznalo).WithMany(p => p.Ertekeleseks)
+                .HasForeignKey(d => d.FelhasznaloId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("ertekelesek_ibfk_1");
         });
 
         modelBuilder.Entity<Etelek>(entity =>
@@ -76,6 +101,48 @@ public partial class EtelfutarContext : DbContext
                 .HasForeignKey(d => d.ChainId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("etelek_ibfk_1");
+
+            entity.HasMany(d => d.Etterems).WithMany(p => p.Etels)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Excludedetel",
+                    r => r.HasOne<Ettermek>().WithMany()
+                        .HasForeignKey("EtteremId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("excludedetel_ibfk_1"),
+                    l => l.HasOne<Etelek>().WithMany()
+                        .HasForeignKey("EtelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("excludedetel_ibfk_2"),
+                    j =>
+                    {
+                        j.HasKey("EtelId", "EtteremId").HasName("PRIMARY");
+                        j.ToTable("excludedetel");
+                        j.HasIndex(new[] { "EtelId", "EtteremId" }, "EtelId");
+                        j.HasIndex(new[] { "EtteremId" }, "EtteremId");
+                        j.IndexerProperty<int>("EtelId").HasColumnType("int(11)");
+                        j.IndexerProperty<int>("EtteremId").HasColumnType("int(11)");
+                    });
+
+            entity.HasMany(d => d.Rendeles).WithMany(p => p.Etels)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Rendeltetel",
+                    r => r.HasOne<Rendele>().WithMany()
+                        .HasForeignKey("RendelesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("rendeltetel_ibfk_1"),
+                    l => l.HasOne<Etelek>().WithMany()
+                        .HasForeignKey("EtelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("rendeltetel_ibfk_2"),
+                    j =>
+                    {
+                        j.HasKey("EtelId", "RendelesId").HasName("PRIMARY");
+                        j.ToTable("rendeltetel");
+                        j.HasIndex(new[] { "EtelId", "RendelesId" }, "EtelId");
+                        j.HasIndex(new[] { "RendelesId" }, "RendelesId");
+                        j.IndexerProperty<int>("EtelId").HasColumnType("int(11)");
+                        j.IndexerProperty<int>("RendelesId").HasColumnType("int(11)");
+                    });
         });
 
         modelBuilder.Entity<Ettermek>(entity =>
@@ -107,31 +174,6 @@ public partial class EtelfutarContext : DbContext
                 .HasConstraintName("ettermek_ibfk_1");
         });
 
-        modelBuilder.Entity<Excludedetel>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("excludedetel");
-
-            entity.HasIndex(e => new { e.EtelId, e.EtteremId }, "EtelId");
-
-            entity.HasIndex(e => e.EtteremId, "EtteremId");
-
-            entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.EtelId).HasColumnType("int(11)");
-            entity.Property(e => e.EtteremId).HasColumnType("int(11)");
-
-            entity.HasOne(d => d.Etel).WithMany(p => p.Excludedetels)
-                .HasForeignKey(d => d.EtelId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("excludedetel_ibfk_2");
-
-            entity.HasOne(d => d.Etterem).WithMany(p => p.Excludedetels)
-                .HasForeignKey(d => d.EtteremId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("excludedetel_ibfk_1");
-        });
-
         modelBuilder.Entity<Felhasznalok>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -146,6 +188,7 @@ public partial class EtelfutarContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(64);
             entity.Property(e => e.FelhasznaloNev).HasMaxLength(32);
             entity.Property(e => e.Hash).HasMaxLength(64);
+            entity.Property(e => e.Jogosultsag).HasColumnType("int(11)");
             entity.Property(e => e.Lakcim).HasMaxLength(64);
             entity.Property(e => e.Salt).HasMaxLength(64);
             entity.Property(e => e.VarosId).HasColumnType("int(11)");
@@ -156,7 +199,7 @@ public partial class EtelfutarContext : DbContext
                 .HasConstraintName("felhasznalok_ibfk_1");
         });
 
-        modelBuilder.Entity<Rendeles>(entity =>
+        modelBuilder.Entity<Rendele>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
@@ -174,31 +217,6 @@ public partial class EtelfutarContext : DbContext
                 .HasConstraintName("rendeles_ibfk_1");
         });
 
-        modelBuilder.Entity<Rendeltetel>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("rendeltetel");
-
-            entity.HasIndex(e => new { e.EtelId, e.RendelesId }, "EtelId");
-
-            entity.HasIndex(e => e.RendelesId, "RendelesId");
-
-            entity.Property(e => e.Id).HasColumnType("int(11)");
-            entity.Property(e => e.EtelId).HasColumnType("int(11)");
-            entity.Property(e => e.RendelesId).HasColumnType("int(11)");
-
-            entity.HasOne(d => d.Etel).WithMany(p => p.Rendeltetels)
-                .HasForeignKey(d => d.EtelId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("rendeltetel_ibfk_2");
-
-            entity.HasOne(d => d.Rendeles).WithMany(p => p.Rendeltetels)
-                .HasForeignKey(d => d.RendelesId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("rendeltetel_ibfk_1");
-        });
-
         modelBuilder.Entity<Varosok>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -207,7 +225,7 @@ public partial class EtelfutarContext : DbContext
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
             entity.Property(e => e.IndexKep)
-                .HasMaxLength(64)
+                .HasMaxLength(224)
                 .HasColumnName("indexKep");
             entity.Property(e => e.Nev).HasMaxLength(32);
         });

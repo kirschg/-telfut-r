@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace EtelfutarAPI.Models;
 
@@ -20,8 +19,11 @@ public partial class Felhasznalok
 
     public string Salt { get; set; } = null!;
 
-    [JsonIgnore]
-    public virtual ICollection<Rendeles> Rendeles { get; set; } = new List<Rendeles>();
+    public int Jogosultsag { get; set; }
+
+    public virtual ICollection<Ertekelesek> Ertekeleseks { get; set; } = new List<Ertekelesek>();
+
+    public virtual ICollection<Rendele> Rendeles { get; set; } = new List<Rendele>();
 
     public virtual Varosok Varos { get; set; } = null!;
 }
