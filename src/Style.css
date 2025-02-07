@@ -4,37 +4,33 @@ Classes
 
 */
 
-.constant {
-  background-image: url("img/header.jpg");
-  background-repeat: no-repeat;
-  background-size:cover;
-  padding: 30px;
-  background-position: bottom;
-  text-shadow: 1px 1px hsl(0, 0%, 0%);
-  text-decoration: none;
-  color: hsl(0, 0%, 100%);
+/*
+
+Css for the constant elements (header, footer, nav)
+
+*/
+
+.App{
+  display: flex;
+  flex-direction: column;
 }
 
-.constant h1:hover{
-  text-shadow: 2px 2px hsl(0, 0%, 0%);
-  cursor: pointer;
-}
-
-.nav{
-  flex-direction:row-reverse;
+.nav {
+  flex-direction: row-reverse;
   list-style-type: none;
   color: hsl(0, 0%, 100%);
-  width:fit-content;
+  width: fit-content;
   margin-left: auto;
 }
 
-.nav li{
+.nav li {
   margin-left: auto;
   display: block;
   text-align: center;
   padding-top: 15px;
 }
-.nav li *{
+
+.nav li a {
   text-decoration: none;
   color: hsl(0, 0%, 100%);
   padding: 15px;
@@ -45,19 +41,17 @@ Classes
   background-color: hsl(0, 0%, 15%);
 }
 
-.selected{
-  background-color: hsl(350, 100%, 35%);
+.nav a.active {
+  color: hsl(350, 100%, 35%);
 }
 
-.footer{
-  text-align: center;
-    padding: 3px;
-    background-color: hsl(350, 100%, 35%);
-    color: hsl(0, 0%, 100%);
-    width: 100%;
-}
+/*
 
-.button{
+Css for the reusable elements
+
+*/
+
+.button {
   display: inline-block;
   width: fit-content;
   text-align: center;
@@ -69,30 +63,83 @@ Classes
   height: fit-content;
 }
 
-.button:hover{
+.button:hover {
   background-color: hsl(350, 100%, 25%);
   cursor: pointer;
 }
 
-.city{
+/* 
+
+Css for the pages required to order food
+
+*/
+
+.selector {
   position: relative;
   background-color: hsl(350, 100%, 35%);
   background-size: cover;
-  width: 250px;
-  height: 250px;
-  border-radius:100%;
   text-align: center;
-  text-shadow: 2px 2px black;
+  text-shadow: 2px 2px hsl(0, 0%, 0%);
   display: inline-block;
 }
 
-.city *{
+.selector a {
   position: absolute;
-  left: 50%; 
+  left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   text-decoration: none;
   color: hsl(0, 0%, 100%);
+}
+
+.selector div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.city {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  margin: 10px;
+}
+
+.city a {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+}
+
+.restaurant {
+  width: 250px;
+  height: 250px;
+  border-radius: 60px;
+  margin: 10px;
+}
+
+.restaurant a {
+  width: 250px;
+  height: 250px;
+  border-radius: 60px;
+}
+
+.food {
+  width: 450px;
+  height: 250px;
+  border-radius: 60px;
+  margin: 10px;
+}
+
+.food a {
+  width: 450px;
+  height: 250px;
+  border-radius: 60px;
+}
+
+.food div{
+  transform: translate(-50%, 200%);
 }
 
 /*
@@ -101,19 +148,45 @@ Ids
 
 */
 
+#banner {
+  background-image: url("img/header.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 30px;
+  background-position: bottom;
+  text-shadow: 1px 1px hsl(0, 0%, 0%);
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
+}
+
+#banner h1:hover {
+  text-shadow: 2px 2px hsl(0, 0%, 0%);
+  cursor: pointer;
+}
+
+#footer {
+  padding-top: 100%;
+  text-align: center;
+  padding: 3px;
+  background-color: hsl(350, 100%, 35%);
+  color: hsl(0, 0%, 100%);
+  width: 100%;
+  flex: 1;
+}
+
 /*
 
 Tags
 
 */
 
-select{
+select {
   background-color: hsl(0, 0%, 25%);
   border: none;
   color: hsl(0, 0%, 100%);
   padding: 15px;
 }
 
-select:hover{
+select:hover {
   background-color: hsl(0, 0%, 15%);
 }
