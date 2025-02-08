@@ -16,11 +16,11 @@ namespace EtelfutarAPI.Controllers
             {
                 try
                 {
-                    Etelek kapcsolat = context.Eteleks.FirstOrDefaultAsync(x => x.Id == etelId).Result;
-                    Rendeles kapcsolo = context.Rendeles.FirstOrDefaultAsync(x => x.Id == rendelesId).Result;
-                    if (kapcsolat is not null && kapcsolo is not null)
+                    Etelek? etel = await context.Eteleks.FirstOrDefaultAsync(x => x.Id == etelId);
+                    Rendeles? rendeles = await context.Rendeles.FirstOrDefaultAsync(x => x.Id == rendelesId);
+                    if (etel is not null && rendeles is not null)
                     {
-                        kapcsolo.Etels.Add(kapcsolat);
+                        rendeles.Etels.Add(etel);
                         await context.SaveChangesAsync();
                         return Ok("Sikeres mentés");
                     }
@@ -42,11 +42,11 @@ namespace EtelfutarAPI.Controllers
             {
                 try
                 {
-                    Etelek torlendo = context.Eteleks.FirstOrDefaultAsync(x => x.Id == etelId).Result;
-                    Rendeles torlo = context.Rendeles.FirstOrDefaultAsync(x => x.Id == rendelesId).Result;
-                    if (torlendo is not null && torlo is not null)
+                    Etelek? etel = await context.Eteleks.FirstOrDefaultAsync(x => x.Id == etelId);
+                    Rendeles? rendeles = await context.Rendeles.FirstOrDefaultAsync(x => x.Id == rendelesId);
+                    if (etel is not null && rendeles is not null)
                     {
-                        torlo.Etels.Remove(torlendo);
+                        rendeles.Etels.Remove(etel);
                         await context.SaveChangesAsync();
                         return Ok("Sikeres törlés");
                     }
