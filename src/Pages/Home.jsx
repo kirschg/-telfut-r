@@ -4,7 +4,7 @@ import '../Style.css';
 
 function Home() {
   return (
-    <div className="App">
+    <div className="App" style={{color:"hsl(0,0%,0%)"}}>
       <article>
 
         <p>Fedezd fel a nemzetközi konyha ízletes világát, ahol a hagyományos fogások és a modern gasztronómiai élmények találkoznak! A Ételfutár® célja, hogy egyszerűbbé és élvezetesebbé tegye számodra a finom ételek rendelését, bármilyen alkalomra.</p>
