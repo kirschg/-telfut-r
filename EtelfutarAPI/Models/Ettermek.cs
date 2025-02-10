@@ -19,6 +19,8 @@ public partial class Ettermek
 
     public virtual ICollection<Ertekelesek> Ertekeleseks { get; set; } = new List<Ertekelesek>();
 
+    public virtual ICollection<Learaza> Learazas { get; set; } = new List<Learaza>();
+
     public virtual Varosok Varos { get; set; } = null!;
 
     public virtual ICollection<Etelek> Etels { get; set; } = new List<Etelek>();

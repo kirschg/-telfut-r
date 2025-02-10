@@ -1,4 +1,5 @@
-﻿using EtelfutarAPI.Models;
+﻿using EtelfutarAPI.DTOs;
+using EtelfutarAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,8 @@ namespace EtelfutarAPI.Controllers
                 try
                 {
                     List<Felhasznalok> result = await context.Felhasznaloks.Include(x=>x.Varos).ToListAsync();
-                    return Ok(result);
+                    List<FelhasznalokDTO> felhasznalokDTOs = result.Select(x => new FelhasznalokDTO(x)).ToList();
+                    return Ok(felhasznalokDTOs);
                 }
                 catch (Exception ex)
                 {

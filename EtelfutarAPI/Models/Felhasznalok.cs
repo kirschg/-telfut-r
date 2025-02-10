@@ -9,6 +9,8 @@ public partial class Felhasznalok
 
     public string FelhasznaloNev { get; set; } = null!;
 
+    public string TeljesNev { get; set; } = null!;
+
     public string Email { get; set; } = null!;
 
     public int VarosId { get; set; }
@@ -20,6 +22,8 @@ public partial class Felhasznalok
     public string Salt { get; set; } = null!;
 
     public int Jogosultsag { get; set; }
+
+    public int Aktiv { get; set; }
 
     public virtual ICollection<Ertekelesek> Ertekeleseks { get; set; } = new List<Ertekelesek>();
 

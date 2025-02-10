@@ -42,7 +42,7 @@ namespace VizsgaremekAPI.Controllers
                 {
                     string Hash = Program.CreateSHA256(loginDTO.TmpHash);
                     Felhasznalok loggedUser = await context.Felhasznaloks.FirstOrDefaultAsync(u => u.FelhasznaloNev == loginDTO.LoginName && u.Hash == Hash);
-                    if(loggedUser != null /*&& loggedUser.Aktiv == 1*/)
+                    if(loggedUser != null && loggedUser.Aktiv == 1)
                     {
                         string token = Guid.NewGuid().ToString();
                         lock (Program.LoggedInUsers)
@@ -53,8 +53,7 @@ namespace VizsgaremekAPI.Controllers
                         {
                             FelhasznaloNev = loginDTO.LoginName,
                             Email = loggedUser.Email,
-                            //Jogosultsag = loggedUser.Jogosultsag,
-                            //ProfilKepUtvonal = loggedUser.ProfilKepUtvonal,
+                            Jogosultsag = loggedUser.Jogosultsag,
                             Token = token
                         });
                     }

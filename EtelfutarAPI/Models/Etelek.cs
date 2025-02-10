@@ -19,6 +19,8 @@ public partial class Etelek
 
     public virtual Chain Chain { get; set; } = null!;
 
+    public virtual ICollection<Learaza> Learazas { get; set; } = new List<Learaza>();
+
     public virtual ICollection<Ettermek> Etterems { get; set; } = new List<Ettermek>();
 
     public virtual ICollection<Rendeles> Rendeles { get; set; } = new List<Rendeles>();

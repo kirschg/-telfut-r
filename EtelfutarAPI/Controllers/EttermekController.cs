@@ -1,4 +1,5 @@
-﻿using EtelfutarAPI.Models;
+﻿using EtelfutarAPI.DTOs;
+using EtelfutarAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,8 @@ namespace EtelfutarAPI.Controllers
                 try
                 {
                     List<Ettermek> result = await context.Ettermeks.Include(x=>x.Varos).Include(x=>x.Chain).ToListAsync();
-                    return Ok(result);
+                    List<EttermekDTO> ettermekDTOs = result.Select(x => new EttermekDTO(x)).ToList();
+                    return Ok(ettermekDTOs);
                 }
                 catch (Exception ex)
                 {

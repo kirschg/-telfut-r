@@ -25,6 +25,8 @@ public partial class EtelfutarContext : DbContext
 
     public virtual DbSet<Felhasznalok> Felhasznaloks { get; set; }
 
+    public virtual DbSet<Learaza> Learazas { get; set; }
+
     public virtual DbSet<Rendeles> Rendeles { get; set; }
 
     public virtual DbSet<Varosok> Varosoks { get; set; }
@@ -182,21 +184,48 @@ public partial class EtelfutarContext : DbContext
 
             entity.HasIndex(e => e.Email, "Email").IsUnique();
 
+            entity.HasIndex(e => e.FelhasznaloNev, "FelhasznaloNev").IsUnique();
+
             entity.HasIndex(e => e.VarosId, "VarosId");
 
             entity.Property(e => e.Id).HasColumnType("int(255)");
+            entity.Property(e => e.Aktiv).HasColumnType("int(1)");
             entity.Property(e => e.Email).HasMaxLength(64);
             entity.Property(e => e.FelhasznaloNev).HasMaxLength(32);
             entity.Property(e => e.Hash).HasMaxLength(64);
             entity.Property(e => e.Jogosultsag).HasColumnType("int(11)");
             entity.Property(e => e.Lakcim).HasMaxLength(64);
             entity.Property(e => e.Salt).HasMaxLength(64);
+            entity.Property(e => e.TeljesNev).HasMaxLength(64);
             entity.Property(e => e.VarosId).HasColumnType("int(11)");
 
             entity.HasOne(d => d.Varos).WithMany(p => p.Felhasznaloks)
                 .HasForeignKey(d => d.VarosId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("felhasznalok_ibfk_1");
+        });
+
+        modelBuilder.Entity<Learaza>(entity =>
+        {
+            entity.HasKey(e => new { e.EtelId, e.EtteremId }).HasName("PRIMARY");
+
+            entity.ToTable("learazas");
+
+            entity.HasIndex(e => new { e.EtteremId, e.EtelId }, "EtteremId").IsUnique();
+
+            entity.Property(e => e.EtelId).HasColumnType("int(11)");
+            entity.Property(e => e.EtteremId).HasColumnType("int(11)");
+            entity.Property(e => e.Learazas).HasColumnType("int(11)");
+
+            entity.HasOne(d => d.Etel).WithMany(p => p.Learazas)
+                .HasForeignKey(d => d.EtelId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("learazas_ibfk_2");
+
+            entity.HasOne(d => d.Etterem).WithMany(p => p.Learazas)
+                .HasForeignKey(d => d.EtteremId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("learazas_ibfk_1");
         });
 
         modelBuilder.Entity<Rendeles>(entity =>
