@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2025 at 10:20 AM
+-- Generation Time: Feb 10, 2025 at 01:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,13 +59,6 @@ CREATE TABLE `ertekelesek` (
   `Szoveg` varchar(255) NOT NULL,
   `Ertekeles` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `ertekelesek`
---
-
-INSERT INTO `ertekelesek` (`Id`, `FelhasznaloId`, `EtteremId`, `Szoveg`, `Ertekeles`) VALUES
-(1, 1, 2, 'Nagyon fincsi! Nagyon jó!', 5);
 
 -- --------------------------------------------------------
 
@@ -184,20 +177,22 @@ INSERT INTO `excludedetel` (`EtelId`, `EtteremId`) VALUES
 CREATE TABLE `felhasznalok` (
   `Id` int(255) NOT NULL,
   `FelhasznaloNev` varchar(32) NOT NULL,
+  `TeljesNev` varchar(64) NOT NULL,
   `Email` varchar(64) NOT NULL,
   `VarosId` int(11) NOT NULL,
   `Lakcim` varchar(64) NOT NULL,
   `Hash` varchar(64) NOT NULL,
   `Salt` varchar(64) NOT NULL,
-  `Jogosultsag` int(11) NOT NULL
+  `Jogosultsag` int(11) NOT NULL,
+  `Aktiv` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `felhasznalok`
 --
 
-INSERT INTO `felhasznalok` (`Id`, `FelhasznaloNev`, `Email`, `VarosId`, `Lakcim`, `Hash`, `Salt`, `Jogosultsag`) VALUES
-(1, 'Takács László', 'takacslaci@gmail.com', 1, 'Petőfi Utca 29', '', '', 0);
+INSERT INTO `felhasznalok` (`Id`, `FelhasznaloNev`, `TeljesNev`, `Email`, `VarosId`, `Lakcim`, `Hash`, `Salt`, `Jogosultsag`, `Aktiv`) VALUES
+(7, 'TakacsL', 'Takacs Laszlo', 'takacslacika81@gmail.com', 1, 'Utca 29', '526100240222f74303ededea5e0e631e8682a9df6904e191c2b10857e41ce99c', 'tboBWFwyJUUDZRTlFgPIvkc4J8GygbyOhiE1US5Cg9WIceyofDMTQNInaUTavyop', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -231,13 +226,6 @@ CREATE TABLE `rendeles` (
   `OsszAr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `rendeles`
---
-
-INSERT INTO `rendeles` (`Id`, `FelhasznaloId`, `OsszAr`) VALUES
-(1, 1, 10000);
-
 -- --------------------------------------------------------
 
 --
@@ -248,14 +236,6 @@ CREATE TABLE `rendeltetel` (
   `EtelId` int(11) NOT NULL,
   `RendelesId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `rendeltetel`
---
-
-INSERT INTO `rendeltetel` (`EtelId`, `RendelesId`) VALUES
-(2, 1),
-(11, 1);
 
 -- --------------------------------------------------------
 
@@ -338,6 +318,7 @@ ALTER TABLE `excludedetel`
 ALTER TABLE `felhasznalok`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `Email` (`Email`),
+  ADD UNIQUE KEY `FelhasznaloNev` (`FelhasznaloNev`),
   ADD KEY `VarosId` (`VarosId`);
 
 --
@@ -400,7 +381,7 @@ ALTER TABLE `ettermek`
 -- AUTO_INCREMENT for table `felhasznalok`
 --
 ALTER TABLE `felhasznalok`
-  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `rendeles`
