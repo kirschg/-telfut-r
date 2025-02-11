@@ -3,6 +3,7 @@ using EtelfutarAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Common;
 
 namespace EtelfutarAPI.Controllers
 {
@@ -109,9 +110,10 @@ namespace EtelfutarAPI.Controllers
             using (var context = new EtelfutarContext())
             {
                 List<Etelek> etelek = await context.Eteleks.Where(e => e.Chain.Nev == etterem).Include(x => x.Chain).ToListAsync();
+                List<EtelekDTO> etelekDTOs = etelek.Select(x => new EtelekDTO(x)).ToList();
                 if (etelek.Count != 0)
                 {
-                    return Ok(etelek);
+                    return Ok(etelekDTOs);
                 }
                 else
                 {
