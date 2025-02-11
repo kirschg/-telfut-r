@@ -206,11 +206,12 @@
         ],
         "parameters": [
           {
-            "name": "etterem",
+            "name": "etteremId",
             "in": "query",
             "style": "form",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -587,17 +588,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Felhasznalok"
+                "$ref": "#/components/schemas/RegistryFelhasznalokDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Felhasznalok"
+                "$ref": "#/components/schemas/RegistryFelhasznalokDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Felhasznalok"
+                "$ref": "#/components/schemas/RegistryFelhasznalokDTO"
               }
             }
           }
@@ -988,6 +989,13 @@
           "chain": {
             "$ref": "#/components/schemas/Chain"
           },
+          "learazas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Learaza"
+            },
+            "nullable": true
+          },
           "etterems": {
             "type": "array",
             "items": {
@@ -1038,6 +1046,13 @@
             },
             "nullable": true
           },
+          "learazas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Learaza"
+            },
+            "nullable": true
+          },
           "varos": {
             "$ref": "#/components/schemas/Varosok"
           },
@@ -1059,6 +1074,10 @@
             "format": "int32"
           },
           "felhasznaloNev": {
+            "type": "string",
+            "nullable": true
+          },
+          "teljesNev": {
             "type": "string",
             "nullable": true
           },
@@ -1086,6 +1105,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "aktiv": {
+            "type": "integer",
+            "format": "int32"
+          },
           "ertekeleseks": {
             "type": "array",
             "items": {
@@ -1106,6 +1129,30 @@
         },
         "additionalProperties": false
       },
+      "Learaza": {
+        "type": "object",
+        "properties": {
+          "etteremId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "etelId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "learazas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "etel": {
+            "$ref": "#/components/schemas/Etelek"
+          },
+          "etterem": {
+            "$ref": "#/components/schemas/Ettermek"
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginDTO": {
         "type": "object",
         "properties": {
@@ -1114,6 +1161,40 @@
             "nullable": true
           },
           "tmpHash": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegistryFelhasznalokDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "felhasznaloNev": {
+            "type": "string",
+            "nullable": true
+          },
+          "teljesNev": {
+            "type": "string",
+            "nullable": true
+          },
+          "hash": {
+            "type": "string",
+            "nullable": true
+          },
+          "varosId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lakCim": {
+            "type": "string",
+            "nullable": true
+          },
+          "salt": {
             "type": "string",
             "nullable": true
           }

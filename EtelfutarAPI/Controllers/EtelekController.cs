@@ -105,14 +105,16 @@ namespace EtelfutarAPI.Controllers
             }
         }
         [HttpGet("GetEtelekByEtterem")]
-        public async Task<IActionResult> GetEtelekByEtterem(string etterem)
+        public async Task<IActionResult> GetEtelekByEtterem(int etteremId)
         {
             using (var context = new EtelfutarContext())
             {
-                List<Etelek> etelek = await context.Eteleks.Where(e => e.Chain.Nev == etterem).Include(x => x.Chain).ToListAsync();
-                List<EtelekDTO> etelekDTOs = etelek.Select(x => new EtelekDTO(x)).ToList();
-                if (etelek.Count != 0)
+                Ettermek? etterem = await context.Ettermeks.FindAsync(etteremId);
+
+                if (etterem != null)
                 {
+                    List<Etelek> etelek = await context.Eteleks.Where(x => !x.Etterems.Contains(etterem) && x.ChainId == etterem.ChainId).Include(x=>x.Chain).ToListAsync();
+                    List<EtelekDTO> etelekDTOs = etelek.Select(x => new EtelekDTO(x)).ToList();
                     return Ok(etelekDTOs);
                 }
                 else

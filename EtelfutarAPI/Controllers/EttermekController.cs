@@ -111,7 +111,8 @@ namespace EtelfutarAPI.Controllers
                 List<Ettermek> ettermek = await context.Ettermeks.Where(e => e.Varos.Nev == varos).Include(x => x.Varos).Include(x => x.Chain).ToListAsync();
                 if(ettermek.Count != 0)
                 {
-                    return Ok(ettermek);
+                    List<EttermekDTO> ettermekDTOs = ettermek.Select(x => new EttermekDTO(x)).ToList();
+                    return Ok(ettermekDTOs);
                 }
                 else
                 {
