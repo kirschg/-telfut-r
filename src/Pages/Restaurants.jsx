@@ -1,14 +1,15 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import '../Style.css';
-
 function Restaurants() {
+    const { City } = useParams();
     const [restaurants, setRestaurants] = useState([]);
     useEffect(() => {
-        axios.get("https://localhost:44365/api/restaurants")
+        axios.get("https://localhost:7106/Ettermek/GetEttermekByVaros?Varos=" + City)
             .then((res) => {
+                console.log(res.data);
                 setRestaurants(res.data);
             })
             .catch((err) => {
@@ -18,48 +19,13 @@ function Restaurants() {
     return (
         <div className="App">
             <div className=" d-flex justify-content-evenly flex-wrap">
-            {/*restaurants.map((restaurant) => (
-            <h3 className="restaurant">
-                <Link  to={"/" + city.name + "Restaurants"} style={{backgroundImage:`url(${restaurant.image})`}}>
-                    <div>{restaurant.name}</div>
-                </Link>
-            </h3>
-        ))*/}
-            <h3 className="restaurant selector">
-                <Link to="/Budapest/McDonalds/Selection" style={{ backgroundImage: `url()` }}>
-                    <div>asd</div>
-                </Link>
-            </h3>
-            <h3 className="restaurant selector">
-                <Link style={{ backgroundImage: `url()` }}>
-                    <div>asd</div>
-                </Link>
-            </h3>
-            <h3 className="restaurant selector">
-                <Link style={{ backgroundImage: `url()` }}>
-                    <div>asd</div>
-                </Link>
-            </h3>
-            <h3 className="restaurant selector">
-                <Link style={{ backgroundImage: `url()` }}>
-                    <div>asd</div>
-                </Link>
-            </h3>
-            <h3 className="restaurant selector">
-                <Link style={{ backgroundImage: `url()` }}>
-                    <div>asd</div>
-                </Link>
-            </h3>
-            <h3 className="restaurant selector">
-                <Link style={{ backgroundImage: `url()` }}>
-                    <div>asd</div>
-                </Link>
-            </h3>
-            <h3 className="restaurant selector">
-                <Link style={{ backgroundImage: `url()` }}>
-                    <div>asd</div>
-                </Link>
-            </h3>
+                {restaurants.map((restaurant) => (
+                    <h3 className="restaurant selector" key={restaurant.id}>
+                        <Link to={{ pathname: "/" + City + "/" + restaurant.id + "/Selection", state: { RestaurantId: restaurant.chain.nev } }} style={{ backgroundImage: `url(${restaurant.indexKep})` }}>
+                            <div>{restaurant.chain.nev}</div>
+                        </Link>
+                    </h3>
+                ))}
             </div>
         </div>
     );

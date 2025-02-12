@@ -1,10 +1,21 @@
 import "bootstrap/dist/css/bootstrap.css";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import '../Style.css';
 
 function Register() {
-  
+  const navigate = useNavigate();
+  const [cities, setCities] = useState([]);
+  useEffect(() => {
+    axios.get("https://localhost:7106/Varosok/GetVarosokAsync")
+    .then((res) => {
+      setCities(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
   function GenerateSalt(){
     let salt = "";
     let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -16,25 +27,30 @@ function Register() {
   async function register(formData){
     var sha256 = require('js-sha256');
     let password = formData.get("password");
+    let salt = GenerateSalt();
+    let user = {
+      Email: formData.get("email"),
+      FelhasznaloNev: formData.get("userName"),
+      TeljesNev: formData.get("fullName"),
+      Hash: sha256(password + salt),
+      Salt: salt,
+      VarosId: formData.get("city"),
+      Lakcim: formData.get("streetNumber")
+    }
     
     if(password === formData.get("passwordAgain"))
     {
-      let salt = GenerateSalt();
-      let user = {
-        email: formData.get("emailInput"),
-        userName: formData.get("userNameInput"),
-        fullName: formData.get("fullNameInput"),
-        Hash: sha256(password + salt),
-        Salt: salt,
-
-      }
-      axios.post("https://localhost:44365/api/users", user)
+      axios.post("https://localhost:7106/api/Registry", user)
       .then((res) => {
+        alert("Sikeres regisztráció! Nézzen az emailjébe a megerősítéshez!");
         console.log(res);
+        navigate("/Login");
       })
       .catch((err) => {
+        alert("Sikertelen regisztráció!");
         console.log(err);
       });
+      console.log(user);
     }
     else{
       alert("Jelszavak nem eggyeznek!");
@@ -69,6 +85,9 @@ function Register() {
                     <label htmlFor="cityInput" className="form-label">City</label>
                     <select name="city" className="form-select" id="cityInput">
                         <option value="0" hidden>City</option>
+                        {cities.map((city) => (
+                            <option key={city.id} value={city.id}>{city.nev}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="mb-3">

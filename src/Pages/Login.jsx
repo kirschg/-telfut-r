@@ -1,31 +1,46 @@
 import "bootstrap/dist/css/bootstrap.css";
 import '../Style.css';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  async function login(formData){
-    let email = formData.get("email");
+  const navigate = useNavigate();
+  async function login(formData) {
+    let username = formData.get("username");
     let password = formData.get("password");
-    if(true)
-    {
-      console.log(formData);
-    }
-  } 
+    var sha256 = require('js-sha256');
+    let salt = "";
+    
+    axios.post("https://localhost:7106/api/Login/GetSalt/" + username)
+      .then((res) => {
+        salt = res.data;
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+    let hash = sha256(password + salt);
+    /*axios.post("https://localhost:7106/api/Login", { LoginName: username, TmpHash: hash })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err))*/
+    //navigate("/");
+  }
   return (
     <div className="App">
-        <div className="SignPanel">
-            <h1>Login</h1>
-            <form className="Form" action={login}>
-                <div className="mb-3">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                    <input type="text" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                    <input type="password" name="password" className="form-control" id="exampleInputPassword1" />
-                </div>
-                <button type="submit" className="btn">Login</button>
-            </form>
-        </div>
+      <div className="SignPanel">
+        <h1>Login</h1>
+        <form className="Form" action={login}>
+          <div className="mb-3">
+            <label htmlFor="usernameInput" className="form-label">Email address</label>
+            <input type="text" name="username" className="form-control" id="usernameInput" aria-describedby="emailHelp" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+            <input type="password" name="password" className="form-control" id="exampleInputPassword1" />
+          </div>
+          <button type="submit" className="btn">Login</button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import '../Style.css';
 function Cities() {
     const [cities, setCities] = useState([]);
     useEffect(() => {
-        axios.get("https://localhost:44365/api/cities")
+        axios.get("https://localhost:7106/Varosok/GetVarosokAsync")
             .then((res) => {
                 setCities(res.data);
             })
@@ -16,50 +16,16 @@ function Cities() {
             });
     }, []);
     return (
+        console.log(cities),
         <div className="App">
             <div className=" d-flex justify-content-evenly flex-wrap">
-                {/*cities.map((city) => (
-            <h3 className="city">
-                <Link  to={"/" + city.name + "Restaurants"} style={{backgroundImage:`url(${city.image})`}}>
-                    <div>{city.name}</div>
-                </Link>
-            </h3>
-        ))*/}
-                <h3 className="city selector">
-                    <Link to={"/Budapest/Restaurants"} style={{ backgroundImage: `url()` }}>
-                        <div>asd</div>
-                    </Link>
-                </h3>
-                <h3 className="city selector">
-                    <Link style={{ backgroundImage: `url()` }}>
-                        <div>asd</div>
-                    </Link>
-                </h3>
-                <h3 className="city selector">
-                    <Link style={{ backgroundImage: `url()` }}>
-                        <div>asd</div>
-                    </Link>
-                </h3>
-                <h3 className="city selector">
-                    <Link style={{ backgroundImage: `url()` }}>
-                        <div>asd</div>
-                    </Link>
-                </h3>
-                <h3 className="city selector">
-                    <Link style={{ backgroundImage: `url()` }}>
-                        <div>asd</div>
-                    </Link>
-                </h3>
-                <h3 className="city selector">
-                    <Link style={{ backgroundImage: `url()` }}>
-                        <div>asd</div>
-                    </Link>
-                </h3>
-                <h3 className="city selector">
-                    <Link style={{ backgroundImage: `url()` }}>
-                        <div>asd</div>
-                    </Link>
-                </h3>
+                {cities.map((city) => (
+                    <h3 className="city selector" key={city.id}>
+                        <Link to={{ pathname: "/" + city.nev + "/Restaurants", state: { city: city.nev } }} style={{ backgroundImage: `url("${city.indexKep}")` }}>
+                            <div>{city.nev}</div>
+                        </Link>
+                    </h3>
+                ))}
             </div>
         </div>
     );

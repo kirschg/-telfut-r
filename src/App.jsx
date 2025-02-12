@@ -29,7 +29,7 @@ function App() {
       </nav>
       <Outlet />
       <footer id="footer" className="align-items-end">
-        <p>2024 Ételfutár® - Minden jog fenntartva.</p>
+        <p>2024-2025 Ételfutár® - Minden jog fenntartva.</p>
       </footer>
     </div>
   );

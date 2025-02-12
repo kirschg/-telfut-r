@@ -20,7 +20,7 @@ root.render(
       <Route index element={<Home />} />
       <Route path="Cities" element={<Cities />} />
       <Route path=":City/Restaurants" element={<Restaurants />} />
-      <Route path=":City/:Restaurant/Selection" element={<Foods />} />
+      <Route path=":City/:RestaurantId/Selection" element={<Foods />} />
       <Route path="YourOrder" element={<Order />} />
       <Route path="Register" element={<Register />} />
       <Route path="Login" element={<Login />} />
