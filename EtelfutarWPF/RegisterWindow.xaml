@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EtelfutarWPF"
         mc:Ignorable="d"
-        Title="Ételfutár | Regisztráció" Height="400" Width="350">
+        Title="Ételfutár | Regisztráció" Height="410" Width="350">
     <StackPanel>
         <Label Content="Felhasználó név:" HorizontalAlignment="Center"></Label>
         <TextBox Name="tbx_felhasznalo_nev" Width="200"></TextBox>
+        <Label Content="Teljes név:" HorizontalAlignment="Center"></Label>
+        <TextBox Name="tbx_teljes_nev" Width="200"></TextBox>
         <Label Content="Email cím:" HorizontalAlignment="Center"></Label>
         <TextBox Name="tbx_email_cim" Width="200"></TextBox>
         <Label Content="Város Id:" HorizontalAlignment="Center"></Label>
@@ -19,7 +21,7 @@
         <PasswordBox Name="pbx_jelszo" Width="200"></PasswordBox>
         <Label Content="Jelszó újra:" HorizontalAlignment="Center"></Label>
         <PasswordBox Name="pbx_jelszo_ujra" Width="200"></PasswordBox>
-        <Button Click="Regisztracio_Click" Content="Bejelentkezés" Width="100" Margin="0,10,0,0"></Button>
+        <Button Click="Regisztracio_Click" Content="Regisztrálás" Width="100" Margin="0,10,0,0"></Button>
         <Button Click="Megse_Click" Content="Mégse" Width="100" Margin="0,10,0,0"></Button>
     </StackPanel>
 </Window>

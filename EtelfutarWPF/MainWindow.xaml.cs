@@ -60,6 +60,7 @@ namespace EtelfutarWPF
         private void Regisztracio_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.client = sharedClient;
             registerWindow.ShowDialog();
         }
 

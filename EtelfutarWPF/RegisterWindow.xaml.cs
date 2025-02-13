@@ -1,9 +1,13 @@
-﻿using EtelfutarWPF.Models;
+﻿using EtelfutarWPF.DTOs;
+using EtelfutarWPF.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace EtelfutarWPF
 {
@@ -21,12 +26,14 @@ namespace EtelfutarWPF
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        public HttpClient? client;
         public RegisterWindow()
         {
             InitializeComponent();
         }
 
-        private void Regisztracio_Click(object sender, RoutedEventArgs e)
+        
+        private async void Regisztracio_Click(object sender, RoutedEventArgs e)
         {
             if(tbx_felhasznalo_nev.Text != "")
             {
@@ -44,17 +51,28 @@ namespace EtelfutarWPF
                                     string salt = MainWindow.GenerateSalt();
                                     string hashedPassword = MainWindow.CreateSHA256(pbx_jelszo.Password + salt);
                                     string doubleHashedPassword = MainWindow.CreateSHA256(hashedPassword);
-                                    Felhasznalok ujFelhasznalo = new Felhasznalok()
+                                    RegistryFelhasznalokDTO ujFelhasznalo = new RegistryFelhasznalokDTO()
                                     {
-                                        FelhasznaloNev = tbx_felhasznalo_nev.Text,
                                         Email = tbx_email_cim.Text,
-                                        Lakcim = tbx_lakcim.Text,
+                                        FelhasznaloNev = tbx_felhasznalo_nev.Text,
+                                        TeljesNev = tbx_teljes_nev.Text,
+                                        Hash = hashedPassword,
                                         VarosId = int.Parse(tbx_varos_id.Text),
-                                        Hash = doubleHashedPassword,
-                                        Salt = salt,
-                                        Jogosultsag = 0,
+                                        LakCim = tbx_lakcim.Text,
+                                        Salt = salt
                                     };
-                                    var response = await client.PostAsync($"api/Registry/", new StringContent(ujFelhasznalo, Encoding.UTF8, "text/plain"));
+                                    try
+                                    {
+                                        string json = JsonSerializer.Serialize(ujFelhasznalo, JsonSerializerOptions.Default);
+                                        MessageBox.Show(json);
+                                        var body = new StringContent(json, Encoding.UTF8, "application/json");
+                                        var result = await client.PostAsync("api/Registry", body);
+                                        MessageBox.Show("Sikeres regisztráció.");
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
                                 }
                                 else
                                 {
