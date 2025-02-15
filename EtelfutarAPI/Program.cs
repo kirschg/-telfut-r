@@ -2,6 +2,7 @@
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using EtelfutarAPI;
 using EtelfutarAPI.Models;
 
 namespace VizsgaremekAPI
@@ -72,6 +73,8 @@ namespace VizsgaremekAPI
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseMiddleware<AuthenticationMiddleware>();
 
             app.UseCors(MyAllowSpecificOrigins);
 

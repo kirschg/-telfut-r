@@ -10,6 +10,8 @@ namespace EtelfutarAPI.Controllers
     [ApiController]
     public class RendelesController : Controller
     {
+
+        [CustomAuthorize]
         [HttpGet("GetRendelesekAsync")]
         public async Task<IActionResult> GetRendelesekAsync()
         {

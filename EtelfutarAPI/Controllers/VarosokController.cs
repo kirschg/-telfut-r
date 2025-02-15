@@ -1,5 +1,4 @@
 ﻿using EtelfutarAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +8,7 @@ namespace EtelfutarAPI.Controllers
     [ApiController]
     public class VarosokController : Controller
     {
+        [CustomAuthorize]
         [HttpGet("GetVarosokAsync")]
         public async Task<IActionResult> GetVarosokAsync()
         {

@@ -59,7 +59,7 @@ namespace VizsgaremekAPI.Controllers
                     }
                     else
                     {
-                        return NotFound("Inaktív felhasználó.");
+                        return Unauthorized("Inaktív felhasználó.");
                     }
                 }
                 catch (Exception ex)
