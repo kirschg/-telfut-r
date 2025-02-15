@@ -10,20 +10,28 @@ function Login() {
     let password = formData.get("password");
     var sha256 = require('js-sha256');
     let salt = "";
-    
+
     axios.post("https://localhost:7106/api/Login/GetSalt/" + username)
       .then((res) => {
         salt = res.data;
         console.log(res.data);
+        let hash = sha256(password + salt);
+        axios.post("https://localhost:7106/api/Login", { LoginName: username, TmpHash: hash })
+          .then(res => {
+            console.log(res.data.token);
+            localStorage.setItem("Token", res.data.token)
+          })
+          .catch(err => console.log(err))
       })
       .catch((err) => console.log(err));
-    let hash = sha256(password + salt);
-    /*axios.post("https://localhost:7106/api/Login", { LoginName: username, TmpHash: hash })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err))*/
+
     //navigate("/");
+    /*
+    FelhasznaloNev = loginDTO.LoginName,
+Email = loggedUser.Email,
+Jogosultsag = loggedUser.Jogosultsag,
+Token = token
+*/
   }
   return (
     <div className="App">

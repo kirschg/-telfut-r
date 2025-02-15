@@ -16,7 +16,7 @@ function Foods() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [RestaurantId]);
     return (
         <div className="App">
             <div className=" d-flex justify-content-evenly flex-wrap">

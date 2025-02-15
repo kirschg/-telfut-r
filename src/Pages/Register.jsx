@@ -34,7 +34,7 @@ function Register() {
       TeljesNev: formData.get("fullName"),
       Hash: sha256(password + salt),
       Salt: salt,
-      VarosId: formData.get("city"),
+      VarosId: 1,//formData.get("city"),
       Lakcim: formData.get("streetNumber")
     }
     
