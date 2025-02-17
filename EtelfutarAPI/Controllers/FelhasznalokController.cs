@@ -75,8 +75,8 @@ namespace EtelfutarAPI.Controllers
                 }
             }
         }
-        [HttpDelete("DeleteEtelAsync")]
-        public async Task<IActionResult> DeleteEtelAsync(int id)
+        [HttpDelete("DeleteFelhasznaloAsync")]
+        public async Task<IActionResult> DeleteFelhasznaloAsync(int id)
         {
             using (var context = new EtelfutarContext())
             {

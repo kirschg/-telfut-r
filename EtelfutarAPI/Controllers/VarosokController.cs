@@ -8,7 +8,7 @@ namespace EtelfutarAPI.Controllers
     [ApiController]
     public class VarosokController : Controller
     {
-        [CustomAuthorize]
+        //[CustomAuthorize]
         [HttpGet("GetVarosokAsync")]
         public async Task<IActionResult> GetVarosokAsync()
         {
