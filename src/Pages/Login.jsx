@@ -40,7 +40,7 @@ Token = token
         <h1>Login</h1>
         <form className="Form" action={login}>
           <div className="mb-3">
-            <label htmlFor="usernameInput" className="form-label">Email address</label>
+            <label htmlFor="usernameInput" className="form-label">Username</label>
             <input type="text" name="username" className="form-control" id="usernameInput" aria-describedby="emailHelp" />
           </div>
           <div className="mb-3">
