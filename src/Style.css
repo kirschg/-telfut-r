@@ -14,6 +14,8 @@ Css for the constant elements (header, footer, nav)
   display: flex;
   flex-direction: column;
   color: hsl(0, 0%, 100%);
+  min-height: 100%;
+  background-color: hsl(0, 0%, 100%);
 }
 
 .nav {
@@ -232,13 +234,11 @@ Ids
 }
 
 #footer {
-  padding-top: 100%;
   text-align: center;
-  padding: 3px;
+  padding: 7px;
   background-color: hsl(350, 100%, 35%);
   color: hsl(0, 0%, 100%);
   width: 100%;
-  flex: 1;
 }
 
 /*
@@ -246,6 +246,10 @@ Ids
 Tags
 
 */
+
+body{
+  background-color: hsl(350, 100%, 35%);
+}
 
 select {
   background-color: hsl(0, 0%, 25%);

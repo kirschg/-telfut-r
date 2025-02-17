@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 import '../Style.css';
 
-function Home() {
+export const Home = () => {
   return (
     <div className="App" style={{color:"hsl(0,0%,0%)"}}>
       <article>
@@ -29,4 +29,3 @@ function Home() {
     </div>
   );
 }
-export default Home;

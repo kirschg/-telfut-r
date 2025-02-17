@@ -1,9 +1,10 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 import '../Style.css';
-function Restaurants() {
+
+export const Restaurants = () => {
     const { City } = useParams();
     const [restaurants, setRestaurants] = useState([]);
     useEffect(() => {
@@ -30,4 +31,3 @@ function Restaurants() {
         </div>
     );
 }
-export default Restaurants;

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import '../Style.css';
 
-function Cities() {
+export const Cities = () => {
     const [cities, setCities] = useState([]);
     useEffect(() => {
         axios.get("https://localhost:7106/Varosok/GetVarosokAsync", {headers:{"Authorization": `Bearer ${localStorage.getItem("Token")}`}})
@@ -30,4 +30,3 @@ function Cities() {
         </div>
     );
 }
-export default Cities;

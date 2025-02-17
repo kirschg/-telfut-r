@@ -3,7 +3,7 @@ import '../Style.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+export const Login = () => {
   const navigate = useNavigate();
   async function login(formData) {
     let username = formData.get("username");
@@ -20,12 +20,13 @@ function Login() {
           .then(res => {
             console.log(res.data.token);
             localStorage.setItem("Token", res.data.token)
+            navigate("/");
           })
           .catch(err => console.log(err))
       })
       .catch((err) => console.log(err));
 
-    //navigate("/");
+    
     /*
     FelhasznaloNev = loginDTO.LoginName,
 Email = loggedUser.Email,
@@ -52,4 +53,3 @@ Token = token
     </div>
   );
 }
-export default Login;

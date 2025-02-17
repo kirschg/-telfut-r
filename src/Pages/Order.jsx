@@ -1,11 +1,10 @@
 import "bootstrap/dist/css/bootstrap.css";
 import '../Style.css';
 
-function Order() {
+export const Order = () => {
   return (
     <div className="App">
         
     </div>
   );
 }
-export default Order;

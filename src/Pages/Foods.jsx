@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import '../Style.css';
 
-function Foods() {
+export const Foods = () => {
     const { RestaurantId } = useParams();
     const [foods, setFoods] = useState([]);
     useEffect(() => {
@@ -31,4 +31,3 @@ function Foods() {
         </div>
     );
 }
-export default Foods;

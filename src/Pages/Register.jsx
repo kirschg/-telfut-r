@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import '../Style.css';
 
-function Register() {
+export const Register = () => {
   const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   useEffect(() => {
@@ -101,4 +101,3 @@ function Register() {
     </div>
   );
 }
-export default Register;
