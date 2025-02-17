@@ -54,6 +54,7 @@ namespace EtelfutarWPF
             {
                 menu_felhasznalok.IsEnabled = false;
                 menu_kijelentkezes.IsEnabled = false;
+                dgr_felhasznalok.ItemsSource = null;
             }
         }
 
@@ -70,9 +71,23 @@ namespace EtelfutarWPF
             dgr_felhasznalok.ItemsSource = felhasznalok;
         }
 
-        private void Kijelentkezes_Click(object sender, RoutedEventArgs e)
+        private async void Kijelentkezes_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                string json = JsonSerializer.Serialize(token, JsonSerializerOptions.Default);
+                MessageBox.Show(json);
+                var body = new StringContent(json, Encoding.UTF8, "application/json");
+                var result = await sharedClient.PostAsync("api/Logout", body);
+                MessageBox.Show("Sikeres kijelentkezés.");
+                menu_felhasznalok.IsEnabled = false;
+                menu_kijelentkezes.IsEnabled = false;
+                dgr_felhasznalok.ItemsSource = null;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public static string GenerateSalt()
         {

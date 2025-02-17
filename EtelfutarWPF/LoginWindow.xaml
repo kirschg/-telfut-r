@@ -8,7 +8,7 @@
         Title="Ételfutár | Bejelentkezés" Height="300" Width="350">
     <StackPanel>
         <Label Content="Felhasználó név:" HorizontalAlignment="Center"></Label>
-        <TextBox Name="tbx_felhasznalo_nev" Width="200" Text="Takács László"></TextBox>
+        <TextBox Name="tbx_felhasznalo_nev" Width="200" Text="TakacsL"></TextBox>
         <Label Content="Jelszó:" HorizontalAlignment="Center"></Label>
         <PasswordBox Name="pbx_jelszo" Width="200" Password="TakacsLaszlo"></PasswordBox>
         <Button Click="Bejelentkezes_Click" Content="Bejelentkezés" Width="100" Margin="0,10,0,0"></Button>

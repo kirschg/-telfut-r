@@ -50,7 +50,6 @@ namespace EtelfutarWPF
                                     //Ha minden adatot megadtunk
                                     string salt = MainWindow.GenerateSalt();
                                     string hashedPassword = MainWindow.CreateSHA256(pbx_jelszo.Password + salt);
-                                    string doubleHashedPassword = MainWindow.CreateSHA256(hashedPassword);
                                     RegistryFelhasznalokDTO ujFelhasznalo = new RegistryFelhasznalokDTO()
                                     {
                                         Email = tbx_email_cim.Text,
@@ -67,7 +66,7 @@ namespace EtelfutarWPF
                                         MessageBox.Show(json);
                                         var body = new StringContent(json, Encoding.UTF8, "application/json");
                                         var result = await client.PostAsync("api/Registry", body);
-                                        MessageBox.Show("Sikeres regisztráció.");
+                                        MessageBox.Show("Sikeres regisztráció. Ellenőrizze az emailjeit és erősítse meg az email címét!");
                                     }
                                     catch(Exception ex)
                                     {
