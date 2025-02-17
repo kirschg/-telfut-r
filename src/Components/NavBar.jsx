@@ -1,9 +1,21 @@
 import "bootstrap/dist/css/bootstrap.css";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import '../Style.css';
 
 export const NavBar = () => {
-    return (<>
+    const [token, setToken] = useState(localStorage.getItem("Token"))
+    useEffect(()=>{
+        const handleStorage = () => {
+            setToken(localStorage.getItem("Token"))
+          }
+        
+          window.addEventListener('storage', handleStorage)
+          return () => window.removeEventListener('storage', handleStorage)
+        
+    },[])
+    return (
+        <>
         <div id="banner">
             <h1 style={{ width: "fit-content" }}><Link to="/" style={{ textDecoration: "none", color: "hsl(0, 0%, 100%)" }}>Ételfutár®</Link></h1>
         </div>
@@ -22,8 +34,19 @@ export const NavBar = () => {
                     <option value="HU">HU</option>
                     <option value="EN">EN</option>
                 </select></li>
-                <li><NavLink to="/Login">login</NavLink></li>
-                <li><NavLink to="/Register">register</NavLink></li>
+                {
+                    token !== null && (<>
+                        <li><NavLink to="/Logout" onClick={()=>{localStorage.removeItem("Token"); window.dispatchEvent(new Event('storage'))}}>logout</NavLink></li>
+                        <li><NavLink to="/Profile" onClick={()=>{alert("Token: " + token)}}>profile</NavLink></li>
+                    </>)
+                }
+                {
+                    token === null && (<>
+                        <li><NavLink to="/Login">login</NavLink></li>
+                        <li><NavLink to="/Register">register</NavLink></li>
+                    </>)
+                }
+
                 <li><NavLink to="/">start</NavLink></li>
             </ul>
         </nav>

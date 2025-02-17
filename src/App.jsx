@@ -11,6 +11,9 @@ import { Login } from './Pages/Login';
 import './Style.css';
 
 export const App = () => {
+  /*window.addEventListener("pagehide", ()=>{
+    localStorage.removeItem("Token");
+  })*/
   return (
     <BrowserRouter>
         <header>
@@ -25,6 +28,7 @@ export const App = () => {
             <Route path="YourOrder" element={<Order />} />
             <Route path="Register" element={<Register />} />
             <Route path="Login" element={<Login />} />
+            <Route path="*" element={<Home />} />
           </Route>
         </Routes>
         <footer id="footer">
