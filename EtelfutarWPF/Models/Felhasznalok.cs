@@ -12,6 +12,8 @@ namespace EtelfutarWPF.Models
 
         public string FelhasznaloNev { get; set; } = null!;
 
+        public string TeljesNev { get; set; } = null!;
+
         public string Email { get; set; } = null!;
 
         public int VarosId { get; set; }

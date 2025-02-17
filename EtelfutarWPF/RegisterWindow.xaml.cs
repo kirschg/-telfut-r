@@ -39,7 +39,7 @@ namespace EtelfutarWPF
             {
                 if (tbx_email_cim.Text != "")
                 {
-                    if (tbx_varos_id.Text != "")
+                    if (tbx_varos_id.Text != "" && int.TryParse(tbx_varos_id.Text,out int tbx_varos_id_int))
                     {
                         if (tbx_lakcim.Text != "")
                         {

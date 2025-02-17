@@ -70,6 +70,7 @@ namespace EtelfutarWPF
                                     LoggedUser loggedUser = JsonSerializer.Deserialize<LoggedUser>(valaszJson, options);
                                     MessageBox.Show(loggedUser.Token);
                                     MainWindow.token = loggedUser.Token;
+                                    MainWindow.jogosultsag = loggedUser.Jogosultsag;
                                 }
                                 else
                                 {

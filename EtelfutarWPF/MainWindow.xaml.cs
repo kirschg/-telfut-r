@@ -28,6 +28,9 @@ namespace EtelfutarWPF
     public partial class MainWindow : Window
     {
         public static string token = null;
+        public static int jogosultsag = -1;
+        public static string client_address = "http://localhost:5000";
+        public List<RegistryFelhasznalokDTO> felhasznalok2 = new List<RegistryFelhasznalokDTO>();
 
         public static HttpClient sharedClient = new HttpClient()
         {
@@ -47,14 +50,21 @@ namespace EtelfutarWPF
             loginWindow.ShowDialog();
             if(token is not null)
             {
-                menu_felhasznalok.IsEnabled = true;
                 menu_kijelentkezes.IsEnabled = true;
+                menu_bejelentkezes.IsEnabled = false;
+                if (jogosultsag > 0)
+                {
+                    menu_felhasznalok.IsEnabled = true;
+                }
             }
             else
             {
                 menu_felhasznalok.IsEnabled = false;
                 menu_kijelentkezes.IsEnabled = false;
+                btn_torles.IsEnabled = false;
+                btn_modositas.IsEnabled = false;
                 dgr_felhasznalok.ItemsSource = null;
+                jogosultsag = -1;
             }
         }
 
@@ -67,8 +77,14 @@ namespace EtelfutarWPF
 
         private async void Felhasznalok_Click(object sender, RoutedEventArgs e)
         {
-            List<Felhasznalok> felhasznalok = await sharedClient.GetFromJsonAsync<List<Felhasznalok>>("Felhasznalok/GetFelhasznalokAsync");
+            List<RegistryFelhasznalokDTO> felhasznalok = await sharedClient.GetFromJsonAsync<List<RegistryFelhasznalokDTO>>("Felhasznalok/GetFelhasznalokAsync");
+            felhasznalok2 = felhasznalok;
             dgr_felhasznalok.ItemsSource = felhasznalok;
+            if (jogosultsag > 1)
+            {
+                btn_torles.IsEnabled = true;
+                btn_modositas.IsEnabled = true;
+            }
         }
 
         private async void Kijelentkezes_Click(object sender, RoutedEventArgs e)
@@ -83,11 +99,21 @@ namespace EtelfutarWPF
                 menu_felhasznalok.IsEnabled = false;
                 menu_kijelentkezes.IsEnabled = false;
                 dgr_felhasznalok.ItemsSource = null;
+                token = null;
+                jogosultsag = -1;
+                btn_torles.IsEnabled = false;
+                btn_modositas.IsEnabled = false;
+                menu_bejelentkezes.IsEnabled = true;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private async void Beallitasok_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.ShowDialog();
         }
         public static string GenerateSalt()
         {
@@ -114,9 +140,54 @@ namespace EtelfutarWPF
             }
         }
 
-        private void Torles_Click(object sender, RoutedEventArgs e)
+        private async void Torles_Click(object sender, RoutedEventArgs e)
         {
+            if (dgr_felhasznalok.SelectedItem is not null)
+            {
+                felhasznalok2.Remove((RegistryFelhasznalokDTO)dgr_felhasznalok.SelectedItem);
+                //felhasználó törlése az adatbázisból
+                try
+                {
+                    //string json = JsonSerializer.Serialize(((Felhasznalok)dgr_felhasznalok.SelectedItem).Id, JsonSerializerOptions.Default);
+                    //MessageBox.Show(json);
 
+                    //var body = new StringContent(json, Encoding.UTF8, "application/json");
+                    var result = await sharedClient.DeleteAsync($"{sharedClient.BaseAddress}Felhasznalok/DeleteFelhasznaloAsync?id={((Felhasznalok)dgr_felhasznalok.SelectedItem).Id}");
+                    if (result.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Sikeres törlés.");
+                    }
+                    else
+                    {
+                        
+                        MessageBox.Show($"Error: {result}\n"+ $"{sharedClient.BaseAddress}Felhasznalok/DeleteFelhasznaloAsync?id={((Felhasznalok)dgr_felhasznalok.SelectedItem).Id}");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                //datagrid frissítése
+                dgr_felhasznalok.ItemsSource = null;
+                dgr_felhasznalok.ItemsSource = felhasznalok2;
+            }
+            else
+            {
+                MessageBox.Show("Nincs kiválasztva elem!");
+            }
+        }
+        private async void Modositas_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgr_felhasznalok.SelectedItem is not null)
+            {
+                EditUserWindow.selected_user = (RegistryFelhasznalokDTO)dgr_felhasznalok.SelectedItem;
+                EditUserWindow editUserWindow = new EditUserWindow();
+                editUserWindow.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Nincs kiválasztva elem!");
+            }
         }
     }
 }
