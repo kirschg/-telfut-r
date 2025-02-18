@@ -27,6 +27,7 @@ namespace EtelfutarWPF
         public LoginWindow()
         {
             InitializeComponent();
+            this.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/gfx/icons/etelfutar.png"));
         }
 
         private async void Bejelentkezes_Click(object sender, RoutedEventArgs e)

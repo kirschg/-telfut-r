@@ -8,7 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="gfx\backgrounds\etelfutar_ppt_background.jpg" />
+    <None Remove="gfx\icons\etelfutar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="gfx\backgrounds\etelfutar_ppt_background.jpg" />
+    <Resource Include="gfx\icons\etelfutar.png" />
   </ItemGroup>
 
 </Project>

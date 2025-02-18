@@ -23,6 +23,7 @@ namespace EtelfutarWPF
         public SettingsWindow()
         {
             InitializeComponent();
+            this.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/gfx/icons/etelfutar.png"));
             tbx_cim.Text = MainWindow.client_address;
         }
 

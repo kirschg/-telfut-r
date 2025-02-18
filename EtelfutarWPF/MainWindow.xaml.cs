@@ -30,7 +30,7 @@ namespace EtelfutarWPF
         public static string token = null;
         public static int jogosultsag = -1;
         public static string client_address = "http://localhost:5000";
-        public List<RegistryFelhasznalokDTO> felhasznalok2 = new List<RegistryFelhasznalokDTO>();
+        public static List<Felhasznalok> felhasznalok2 = new List<Felhasznalok>();
 
         public static HttpClient sharedClient = new HttpClient()
         {
@@ -40,6 +40,8 @@ namespace EtelfutarWPF
         public MainWindow()
         {
             InitializeComponent();
+            this.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/gfx/icons/etelfutar.png"));
+
         }
 
         private void Bejelentkezes_Click(object sender, RoutedEventArgs e)
@@ -77,7 +79,7 @@ namespace EtelfutarWPF
 
         private async void Felhasznalok_Click(object sender, RoutedEventArgs e)
         {
-            List<RegistryFelhasznalokDTO> felhasznalok = await sharedClient.GetFromJsonAsync<List<RegistryFelhasznalokDTO>>("Felhasznalok/GetFelhasznalokAsync");
+            List<Felhasznalok> felhasznalok = await sharedClient.GetFromJsonAsync<List<Felhasznalok>>("Felhasznalok/GetFelhasznalokAsync");
             felhasznalok2 = felhasznalok;
             dgr_felhasznalok.ItemsSource = felhasznalok;
             if (jogosultsag > 1)
@@ -144,7 +146,7 @@ namespace EtelfutarWPF
         {
             if (dgr_felhasznalok.SelectedItem is not null)
             {
-                felhasznalok2.Remove((RegistryFelhasznalokDTO)dgr_felhasznalok.SelectedItem);
+                felhasznalok2.Remove((Felhasznalok)dgr_felhasznalok.SelectedItem);
                 //felhasználó törlése az adatbázisból
                 try
                 {
@@ -180,9 +182,13 @@ namespace EtelfutarWPF
         {
             if (dgr_felhasznalok.SelectedItem is not null)
             {
-                EditUserWindow.selected_user = (RegistryFelhasznalokDTO)dgr_felhasznalok.SelectedItem;
+                EditUserWindow.selected_user = (Felhasznalok)dgr_felhasznalok.SelectedItem;
                 EditUserWindow editUserWindow = new EditUserWindow();
                 editUserWindow.ShowDialog();
+                List<Felhasznalok> felhasznalok = await sharedClient.GetFromJsonAsync<List<Felhasznalok>>("Felhasznalok/GetFelhasznalokAsync");
+                felhasznalok2 = felhasznalok;
+                dgr_felhasznalok.ItemsSource = null;
+                dgr_felhasznalok.ItemsSource = felhasznalok2;
             }
             else
             {

@@ -30,6 +30,7 @@ namespace EtelfutarWPF
         public RegisterWindow()
         {
             InitializeComponent();
+            this.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/gfx/icons/etelfutar.png"));
         }
 
         
