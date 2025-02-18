@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
-import '../Style.css';
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import '../Style.css';
 
 export const Login = () => {
   const navigate = useNavigate();

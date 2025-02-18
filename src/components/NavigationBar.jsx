@@ -37,7 +37,7 @@ export const NavBar = () => {
                 {
                     token !== null && (<>
                         <li><NavLink to="/Logout" onClick={()=>{localStorage.removeItem("Token"); window.dispatchEvent(new Event('storage'))}}>logout</NavLink></li>
-                        <li><NavLink to="/Profile" onClick={()=>{alert("Token: " + token)}}>profile</NavLink></li>
+                        <li><NavLink to="/YourProfile" onClick={()=>{alert("Token: " + token)}}>profile</NavLink></li>
                     </>)
                 }
                 {

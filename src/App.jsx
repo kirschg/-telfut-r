@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter, Routes, Route} from "react-router-dom"
-import { NavBar } from './Components/NavBar';
+import { NavBar } from "./components/NavigationBar";
 import { Home } from './Pages/Home'
 import { Cities } from './Pages/Cities'
 import { Restaurants } from './Pages/Restaurants'
@@ -8,6 +8,7 @@ import { Foods } from './Pages/Foods';
 import { Order } from './Pages/Order';
 import { Register } from './Pages/Register';
 import { Login } from './Pages/Login';
+import { YourProfile } from "./Pages/Profile";
 import './Style.css';
 
 export const App = () => {
@@ -28,6 +29,7 @@ export const App = () => {
             <Route path="YourOrder" element={<Order />} />
             <Route path="Register" element={<Register />} />
             <Route path="Login" element={<Login />} />
+            <Route path="YourProfile" element={<YourProfile />} />
             <Route path="*" element={<Home />} />
           </Route>
         </Routes>
