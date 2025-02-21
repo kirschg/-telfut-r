@@ -105,5 +105,22 @@ namespace EtelfutarAPI.Controllers
                 }
             }
         }
+        [HttpGet("GetRendelesByFelhasznalo")]
+        public async Task<IActionResult> GetRendelesByFelhasznalo(string FelhasznaloNev)
+        {
+            using (var context = new EtelfutarContext())
+            {
+                List<Rendeles> rendelesek = await context.Rendeles.Where(e => e.Felhasznalo.FelhasznaloNev == FelhasznaloNev).Include(x => x.Felhasznalo).Include(x => x.Felhasznalo).ToListAsync();
+                if (rendelesek.Count != 0)
+                {
+                    List<RendelesDTO> rendelesDTOs = rendelesek.Select(x => new RendelesDTO(x)).ToList();
+                    return Ok(rendelesDTOs);
+                }
+                else
+                {
+                    return NotFound("Nincs ilyen Rendelés!");
+                }
+            }
+        }
     }
 }
