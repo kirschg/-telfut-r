@@ -70,6 +70,7 @@ namespace EtelfutarWPF
                                         MessageBox.Show(json);
                                         var body = new StringContent(json, Encoding.UTF8, "application/json");
                                         var result = await MainWindow.sharedClient.PutAsync("Felhasznalok/PutFelhasznaloAsync", body);
+                                        result.Content.ReadAsStringAsync().Wait();
                                         if (result.IsSuccessStatusCode)
                                         {
                                             MessageBox.Show("Sikeres módosítás.");
